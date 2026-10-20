@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">গাই খামার</string>
+    <string name="tagline">Cattle and Dairy Farm Manager</string>
+    <string name="lang_english">English</string>
+    <string name="lang_bangla">বাংলা</string>
+
+    <string name="phone">Phone number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="login">Login</string>
+    <string name="no_account">New farm? Create admin account</string>
+    <string name="create_account">Create admin account</string>
+    <string name="have_account">Already have an account? Login</string>
+    <string name="full_name">Full name</string>
+    <string name="farm_name">Farm name</string>
+    <string name="farm_code">Farm code (2-3 letters, e.g. KH)</string>
+    <string name="welcome_user">Hello, %1$s</string>
+
+    <string name="total">Total</string>
+    <string name="beef">Beef</string>
+    <string name="dairy">Dairy</string>
+    <string name="calves">Calves</string>
+    <string name="calf">Calf</string>
+    <string name="sick">Sick</string>
+    <string name="pregnant">Pregnant</string>
+    <string name="animals">Animals</string>
+    <string name="add_animal">Add animal</string>
+    <string name="logout">Logout</string>
+    <string name="search_hint">Search by ID, tag or name</string>
+    <string name="all">All</string>
+    <string name="no_animals">No animals yet. Tap + to add one.</string>
+
+    <string name="category">Category</string>
+    <string name="gender">Gender</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="ear_tag">Ear tag number</string>
+    <string name="animal_name">Name (optional)</string>
+    <string name="breed">Breed</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="purchase_date">Purchase date</string>
+    <string name="purchase_price">Purchase price (৳)</string>
+    <string name="current_weight">Current weight (kg)</string>
+    <string name="target_weight">Target weight (kg)</string>
+    <string name="dairy_status">Dairy status</string>
+    <string name="mother_id">Mother ID (optional)</string>
+    <string name="father_id">Father ID (optional)</string>
+    <string name="notes">Notes</string>
+    <string name="save">Save</string>
+    <string name="animal_details">Animal details</string>
+    <string name="saved_with_id">Saved. ID: %1$s</string>
+    <string name="back">Back</string>
+    <string name="qr_code">QR code</string>
+
+    <!-- Messages -->
+    <string name="err_enter_phone_password">Enter phone and password</string>
+    <string name="err_wrong_login">Wrong phone or password</string>
+    <string name="err_name_farm">Enter your name and farm name</string>
+    <string name="err_phone">Enter a valid phone number</string>
+    <string name="err_farm_code">Farm code must be 2-3 English letters</string>
+    <string name="err_password_short">Password must be at least 6 characters</string>
+    <string name="err_password_mismatch">Passwords do not match</string>
+    <string name="err_phone_exists">This phone number is already registered</string>
+    <string name="err_breed">Enter the breed</string>
+
+    <!-- Detail screen labels -->
+    <string name="d_category">Category</string>
+    <string name="d_ear_tag">Ear tag</string>
+    <string name="d_name">Name</string>
+    <string name="d_breed">Breed</string>
+    <string name="d_gender">Gender</string>
+    <string name="d_dob">Date of birth</string>
+    <string name="d_purchase_date">Purchase date</string>
+    <string name="d_purchase_price">Purchase price</string>
+    <string name="d_current_weight">Current weight</string>
+    <string name="d_target_weight">Target weight</string>
+    <string name="d_dairy_status">Dairy status</string>
+    <string name="d_mother">Mother ID</string>
+    <string name="d_father">Father ID</string>
+    <string name="d_health">Health</string>
+    <string name="d_status">Status</string>
+    <string name="d_notes">Notes</string>
+
+    <!-- Values stored as codes in the database, shown as labels -->
+    <string name="ds_heifer">Heifer</string>
+    <string name="ds_milking">Milking</string>
+    <string name="ds_dry">Dry</string>
+    <string name="h_healthy">Healthy</string>
+    <string name="h_observation">Under observation</string>
+    <string name="h_treatment">Under treatment</string>
+    <string name="h_recovering">Recovering</string>
+    <string name="h_quarantine">Quarantine</string>
+    <string name="st_active">Active</string>
+    <string name="st_sold">Sold</string>
+    <string name="st_dead">Dead</string>
+
+    <!-- Formats -->
+    <string name="fmt_weight">Weight: %1$s kg</string>
+    <string name="fmt_cost">Cost: ৳%1$s</string>
+    <string name="fmt_tag">Tag: %1$s</string>
+    <string name="fmt_status">Status: %1$s</string>
+    <string name="fmt_calf_suffix"> (Calf)</string>
+    <string name="fmt_kg">%1$s kg</string>
+    <string name="fmt_money">৳%1$s</string>
+</resources>

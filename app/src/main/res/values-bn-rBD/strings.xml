@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">গাই খামার</string>
+    <string name="tagline">গবাদিপশু ও দুধ খামার ব্যবস্থাপনা</string>
+    <string name="lang_english">English</string>
+    <string name="lang_bangla">বাংলা</string>
+
+    <string name="phone">ফোন নম্বর</string>
+    <string name="password">পাসওয়ার্ড</string>
+    <string name="confirm_password">পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="login">লগইন</string>
+    <string name="no_account">নতুন খামার? অ্যাডমিন অ্যাকাউন্ট খুলুন</string>
+    <string name="create_account">অ্যাডমিন অ্যাকাউন্ট খুলুন</string>
+    <string name="have_account">আগেই অ্যাকাউন্ট আছে? লগইন করুন</string>
+    <string name="full_name">পূর্ণ নাম</string>
+    <string name="farm_name">খামারের নাম</string>
+    <string name="farm_code">খামারের কোড (২-৩টি ইংরেজি অক্ষর, যেমন KH)</string>
+    <string name="welcome_user">স্বাগতম, %1$s</string>
+
+    <string name="total">মোট</string>
+    <string name="beef">মাংসের গরু</string>
+    <string name="dairy">দুধের গাভী</string>
+    <string name="calves">বাছুর</string>
+    <string name="calf">বাছুর</string>
+    <string name="sick">অসুস্থ</string>
+    <string name="pregnant">গর্ভবতী</string>
+    <string name="animals">পশুর তালিকা</string>
+    <string name="add_animal">পশু যোগ করুন</string>
+    <string name="logout">লগআউট</string>
+    <string name="search_hint">আইডি, ট্যাগ বা নাম দিয়ে খুঁজুন</string>
+    <string name="all">সব</string>
+    <string name="no_animals">এখনও কোনো পশু নেই। যোগ করতে + চাপুন।</string>
+
+    <string name="category">ধরন</string>
+    <string name="gender">লিঙ্গ</string>
+    <string name="female">স্ত্রী</string>
+    <string name="male">পুরুষ</string>
+    <string name="ear_tag">কানের ট্যাগ নম্বর</string>
+    <string name="animal_name">নাম (ঐচ্ছিক)</string>
+    <string name="breed">জাত</string>
+    <string name="date_of_birth">জন্ম তারিখ</string>
+    <string name="purchase_date">ক্রয়ের তারিখ</string>
+    <string name="purchase_price">ক্রয়মূল্য (৳)</string>
+    <string name="current_weight">বর্তমান ওজন (কেজি)</string>
+    <string name="target_weight">লক্ষ্য ওজন (কেজি)</string>
+    <string name="dairy_status">গাভীর অবস্থা</string>
+    <string name="mother_id">মায়ের আইডি (ঐচ্ছিক)</string>
+    <string name="father_id">বাবার আইডি (ঐচ্ছিক)</string>
+    <string name="notes">মন্তব্য</string>
+    <string name="save">সংরক্ষণ করুন</string>
+    <string name="animal_details">পশুর বিবরণ</string>
+    <string name="saved_with_id">সংরক্ষিত হয়েছে। আইডি: %1$s</string>
+    <string name="back">ফিরে যান</string>
+    <string name="qr_code">কিউআর কোড</string>
+
+    <!-- Messages -->
+    <string name="err_enter_phone_password">ফোন নম্বর ও পাসওয়ার্ড দিন</string>
+    <string name="err_wrong_login">ফোন নম্বর বা পাসওয়ার্ড ভুল</string>
+    <string name="err_name_farm">আপনার নাম ও খামারের নাম দিন</string>
+    <string name="err_phone">সঠিক ফোন নম্বর দিন</string>
+    <string name="err_farm_code">খামারের কোড ২-৩টি ইংরেজি অক্ষরের হতে হবে</string>
+    <string name="err_password_short">পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে</string>
+    <string name="err_password_mismatch">পাসওয়ার্ড মিলছে না</string>
+    <string name="err_phone_exists">এই ফোন নম্বর আগেই নিবন্ধিত</string>
+    <string name="err_breed">জাতের নাম দিন</string>
+
+    <!-- Detail screen labels -->
+    <string name="d_category">ধরন</string>
+    <string name="d_ear_tag">কানের ট্যাগ</string>
+    <string name="d_name">নাম</string>
+    <string name="d_breed">জাত</string>
+    <string name="d_gender">লিঙ্গ</string>
+    <string name="d_dob">জন্ম তারিখ</string>
+    <string name="d_purchase_date">ক্রয়ের তারিখ</string>
+    <string name="d_purchase_price">ক্রয়মূল্য</string>
+    <string name="d_current_weight">বর্তমান ওজন</string>
+    <string name="d_target_weight">লক্ষ্য ওজন</string>
+    <string name="d_dairy_status">গাভীর অবস্থা</string>
+    <string name="d_mother">মায়ের আইডি</string>
+    <string name="d_father">বাবার আইডি</string>
+    <string name="d_health">স্বাস্থ্য</string>
+    <string name="d_status">অবস্থা</string>
+    <string name="d_notes">মন্তব্য</string>
+
+    <!-- Values stored as codes in the database, shown as labels -->
+    <string name="ds_heifer">বকনা</string>
+    <string name="ds_milking">দুধ দিচ্ছে</string>
+    <string name="ds_dry">দুধ বন্ধ (শুকনো)</string>
+    <string name="h_healthy">সুস্থ</string>
+    <string name="h_observation">পর্যবেক্ষণে</string>
+    <string name="h_treatment">চিকিৎসাধীন</string>
+    <string name="h_recovering">সুস্থ হচ্ছে</string>
+    <string name="h_quarantine">আলাদা রাখা হয়েছে</string>
+    <string name="st_active">সক্রিয়</string>
+    <string name="st_sold">বিক্রিত</string>
+    <string name="st_dead">মৃত</string>
+
+    <!-- Formats -->
+    <string name="fmt_weight">ওজন: %1$s কেজি</string>
+    <string name="fmt_cost">খরচ: ৳%1$s</string>
+    <string name="fmt_tag">ট্যাগ: %1$s</string>
+    <string name="fmt_status">অবস্থা: %1$s</string>
+    <string name="fmt_calf_suffix"> (বাছুর)</string>
+    <string name="fmt_kg">%1$s কেজি</string>
+    <string name="fmt_money">৳%1$s</string>
+</resources>
