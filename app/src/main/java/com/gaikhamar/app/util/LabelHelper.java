@@ -49,4 +49,14 @@ public final class LabelHelper {
             default:       return code;
         }
     }
+    public static String feedGroup(Context c, String code) {
+        if (code == null) return "";
+        switch (code) {
+            case "BEEF":    return c.getString(R.string.g_beef);
+            case "MILKING": return c.getString(R.string.g_milking);
+            case "DRY":     return c.getString(R.string.g_dry);
+            case "CALF":    return c.getString(R.string.g_calf);
+            default:        return code;
+        }
+    }
 }

@@ -49,4 +49,8 @@ public class CountTileView extends MaterialCardView {
     public void setCount(int count) {
         tvCount.setText(String.valueOf(count));
     }
+
+    public void setValueText(String text) {
+        tvCount.setText(text);
+    }
 }

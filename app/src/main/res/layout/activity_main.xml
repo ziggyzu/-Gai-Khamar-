@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lang_bangla" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
@@ -43,6 +45,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/tvLowStockWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/red_100"
+            android:padding="12dp"
+            android:textColor="@color/red_600"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <GridLayout
             android:layout_width="match_parent"
@@ -96,7 +109,32 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="6dp"
                 app:tileLabel="@string/sick" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileFeedToday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/feed_today" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileLowStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/low_stock" />
         </GridLayout>
+
+        <TextView
+            android:id="@+id/tvCostPerAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/green_900"
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAnimals"
@@ -111,6 +149,20 @@
             android:layout_height="56dp"
             android:layout_marginTop="8dp"
             android:text="@string/add_animal" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFeedLog"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/feed_log" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFeedStock"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/feed_stock" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
