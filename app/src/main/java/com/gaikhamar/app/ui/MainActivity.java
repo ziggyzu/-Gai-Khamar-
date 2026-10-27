@@ -13,6 +13,7 @@ import com.gaikhamar.app.util.NumFmt;
 import com.gaikhamar.app.util.SessionManager;
 import com.gaikhamar.app.viewmodel.AnimalViewModel;
 import com.gaikhamar.app.viewmodel.FeedViewModel;
+import com.gaikhamar.app.viewmodel.MilkViewModel;
 
 public class MainActivity extends BaseActivity {
 
@@ -49,6 +50,11 @@ public class MainActivity extends BaseActivity {
         vm.calfCount.observe(this, n -> b.tileCalf.setCount(n == null ? 0 : n));
         vm.sickCount.observe(this, n -> b.tileSick.setCount(n == null ? 0 : n));
         vm.pregnantCount.observe(this, n -> b.tilePregnant.setCount(n == null ? 0 : n));
+        vm.calvingSoonCount.observe(this, n -> b.tileCalvingSoon.setCount(n == null ? 0 : n));
+
+        MilkViewModel mvm = new ViewModelProvider(this).get(MilkViewModel.class);
+        mvm.todayLiters.observe(this, l ->
+                b.tileMilkToday.setValueText(NumFmt.n(l == null ? 0 : l)));
 
         FeedViewModel fvm = new ViewModelProvider(this).get(FeedViewModel.class);
         fvm.todayKg.observe(this, kg ->
@@ -75,6 +81,10 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, AnimalListActivity.class)));
         b.btnAddAnimal.setOnClickListener(v ->
                 startActivity(new Intent(this, AddAnimalActivity.class)));
+        b.btnMilk.setOnClickListener(v ->
+                startActivity(new Intent(this, MilkActivity.class)));
+        b.btnBatches.setOnClickListener(v ->
+                startActivity(new Intent(this, BatchActivity.class)));
         b.btnFeedLog.setOnClickListener(v ->
                 startActivity(new Intent(this, FeedLogActivity.class)));
         b.btnFeedStock.setOnClickListener(v ->

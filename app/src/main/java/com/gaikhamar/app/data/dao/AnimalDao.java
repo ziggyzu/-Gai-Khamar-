@@ -40,4 +40,19 @@ public interface AnimalDao {
 
     @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' AND dairyStatus = :s")
     LiveData<Integer> countByDairyStatus(String s);
+    @Query("SELECT * FROM animals WHERE id = :id")
+    Animal findById(long id);
+
+    @Query("SELECT * FROM animals WHERE status = 'ACTIVE' AND category = 'DAIRY' "
+            + "AND dairyStatus = 'MILKING' ORDER BY farmCattleId")
+    LiveData<List<Animal>> milkingCows();
+
+    @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' "
+            + "AND (dairyStatus = 'PREGNANT' OR IFNULL(expectedCalvingDate, '') != '')")
+    LiveData<Integer> countPregnant();
+
+    @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' "
+            + "AND IFNULL(expectedCalvingDate, '') != '' "
+            + "AND expectedCalvingDate BETWEEN :from AND :to")
+    LiveData<Integer> countCalvingBetween(String from, String to);
 }

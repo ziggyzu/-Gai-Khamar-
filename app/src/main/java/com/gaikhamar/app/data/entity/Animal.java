@@ -27,6 +27,13 @@ public class Animal {
     public String fatherId;
     @NonNull public String healthStatus = "HEALTHY";
     @NonNull public String status = "ACTIVE";   // ACTIVE, SOLD, DEAD (archived, never deleted)
+    public long batchId;                 // 0 = no batch
+    public double expectedPricePerKg;    // beef: expected sale price per kg (live weight)
+    public String lastHeatDate;
+    public String lastInseminationDate;
+    public String expectedCalvingDate;
+    public String lactationStartDate;
+    public String dryOffDate;
     public String notes;
     public long createdAt;
 }

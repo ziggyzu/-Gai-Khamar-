@@ -59,4 +59,18 @@ public final class LabelHelper {
             default:        return code;
         }
     }
+    public static String milkSession(Context c, String code) {
+        return "EVENING".equals(code) ? c.getString(R.string.evening) : c.getString(R.string.morning);
+    }
+
+    public static String breedingType(Context c, String code) {
+        if (code == null) return "";
+        switch (code) {
+            case "HEAT":               return c.getString(R.string.bt_heat);
+            case "INSEMINATION":       return c.getString(R.string.bt_insemination);
+            case "PREGNANCY_POSITIVE": return c.getString(R.string.bt_preg_pos);
+            case "PREGNANCY_NEGATIVE": return c.getString(R.string.bt_preg_neg);
+            default:                   return code;
+        }
+    }
 }

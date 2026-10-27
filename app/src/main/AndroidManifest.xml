@@ -26,6 +26,8 @@
         <activity android:name=".ui.AnimalDetailActivity" android:exported="false" />
         <activity android:name=".ui.FeedStockActivity" android:exported="false" />
         <activity android:name=".ui.FeedLogActivity" android:exported="false" />
+        <activity android:name=".ui.MilkActivity" android:exported="false" />
+        <activity android:name=".ui.BatchActivity" android:exported="false" />
 
     </application>
 </manifest>

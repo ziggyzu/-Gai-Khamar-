@@ -10,6 +10,9 @@ import androidx.lifecycle.Transformations;
 
 import com.gaikhamar.app.data.Repository;
 import com.gaikhamar.app.data.entity.Animal;
+import com.gaikhamar.app.data.entity.BreedingRecord;
+import com.gaikhamar.app.data.entity.WeightRecord;
+import com.gaikhamar.app.util.DateUtil;
 
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class AnimalViewModel extends AndroidViewModel {
 
     public final LiveData<List<Animal>> animals;
     public final LiveData<Integer> totalCount, beefCount, dairyCount,
-            calfCount, sickCount, pregnantCount;
+            calfCount, sickCount, pregnantCount, calvingSoonCount;
 
     public AnimalViewModel(@NonNull Application app) {
         super(app);
@@ -32,7 +35,10 @@ public class AnimalViewModel extends AndroidViewModel {
         dairyCount = repo.countByCategory("DAIRY");
         calfCount = repo.countByCategory("CALF");
         sickCount = repo.countSick();
-        pregnantCount = repo.countByDairyStatus("PREGNANT");
+        pregnantCount = repo.countPregnant();
+
+        String today = DateUtil.today();
+        calvingSoonCount = repo.countCalvingBetween(today, DateUtil.plusDays(today, 14));
     }
 
     public void setCategory(String category) {
@@ -45,7 +51,13 @@ public class AnimalViewModel extends AndroidViewModel {
         filter.setValue(new String[]{f == null ? "ALL" : f[0], query});
     }
 
-    public LiveData<Animal> getAnimal(long id) {
-        return repo.getAnimal(id);
+    public LiveData<Animal> getAnimal(long id) { return repo.getAnimal(id); }
+    public LiveData<List<WeightRecord>> weights(long id) { return repo.weights(id); }
+    public LiveData<List<BreedingRecord>> breeding(long id) { return repo.breeding(id); }
+
+    /** Total milk of the last 7 days for one cow. */
+    public LiveData<Double> milkLast7(long id) {
+        String today = DateUtil.today();
+        return repo.milkSum(id, DateUtil.plusDays(today, -6), today);
     }
 }

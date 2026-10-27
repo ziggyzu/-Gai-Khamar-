@@ -26,10 +26,10 @@
 
         <ImageView
             android:id="@+id/ivQr"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginTop="12dp"
-            android:contentDescription="QR code" />
+            android:contentDescription="@string/qr_code" />
 
         <TextView
             android:id="@+id/tvDetails"
@@ -39,12 +39,119 @@
             android:lineSpacingExtra="6dp"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/tvInsightsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/insights"
+            android:textColor="@color/green_700"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvInsights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="6dp"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/groupBeefActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddWeight"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/add_weight" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSalePrice"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/set_sale_price" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAssignBatch"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/assign_batch" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/groupDairyActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHeat"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/record_heat" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnInsemination"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/record_insemination" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPregCheck"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/pregnancy_check" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCalving"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/record_calving" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDryOff"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/dry_off" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/history"
+            android:textColor="@color/green_700"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="6dp"
+            android:textSize="15sp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:text="Back" />
+            android:layout_marginTop="20dp"
+            android:text="@string/back" />
     </LinearLayout>
 </ScrollView>
