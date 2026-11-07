@@ -129,6 +129,43 @@
                 android:text="@string/dry_off" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/groupCommonActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHealthRecord"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/health_record" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQuarantine"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRecovered"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mark_recovered" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSell"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/sell_animal" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

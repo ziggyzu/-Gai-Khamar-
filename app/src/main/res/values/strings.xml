@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ===== App and login ===== -->
     <string name="app_name">গাই খামার</string>
     <string name="tagline">Cattle and Dairy Farm Manager</string>
     <string name="lang_english">English</string>
     <string name="lang_bangla">বাংলা</string>
-
     <string name="phone">Phone number</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
@@ -16,6 +18,7 @@
     <string name="farm_code">Farm code (2-3 letters, e.g. KH)</string>
     <string name="welcome_user">Hello, %1$s</string>
 
+    <!-- ===== Dashboard and animals ===== -->
     <string name="total">Total</string>
     <string name="beef">Beef</string>
     <string name="dairy">Dairy</string>
@@ -80,8 +83,9 @@
     <string name="d_health">Health</string>
     <string name="d_status">Status</string>
     <string name="d_notes">Notes</string>
+    <string name="d_batch">Batch</string>
 
-    <!-- Values stored as codes in the database, shown as labels -->
+    <!-- Values stored as codes in the database -->
     <string name="ds_heifer">Heifer</string>
     <string name="ds_milking">Milking</string>
     <string name="ds_dry">Dry</string>
@@ -99,10 +103,12 @@
     <string name="fmt_cost">Cost: ৳%1$s</string>
     <string name="fmt_tag">Tag: %1$s</string>
     <string name="fmt_status">Status: %1$s</string>
-    <string name="fmt_calf_suffix"> (Calf)</string>
+    <string name="fmt_calf_suffix">" (Calf)"</string>
     <string name="fmt_kg">%1$s kg</string>
     <string name="fmt_money">৳%1$s</string>
-    <!-- Phase 2: Feed -->
+    <string name="fmt_liters">%1$s L</string>
+
+    <!-- ===== Phase 2: Feed ===== -->
     <string name="feed_management">Feed management</string>
     <string name="feed_stock">Feed stock</string>
     <string name="feed_log">Daily feed log</string>
@@ -147,7 +153,8 @@
     <string name="f_concentrate">Concentrate feed</string>
     <string name="f_silage">Silage</string>
     <string name="f_mineral">Mineral mix</string>
-    <!-- Phase 3 -->
+
+    <!-- ===== Phase 3: Weight, batches, milk, breeding ===== -->
     <string name="milk_today">Milk today (L)</string>
     <string name="calving_soon">Calving soon</string>
     <string name="milk_records">Milk records</string>
@@ -159,7 +166,6 @@
     <string name="evening">Evening</string>
     <string name="liters">Liters</string>
     <string name="total_milk">Total milk: %1$s L</string>
-    <string name="fmt_liters">%1$s L</string>
     <string name="no_milk_records">No milk recorded for this day.</string>
     <string name="no_milking_cows">No milking cows. Add a dairy cow with status Milking first.</string>
     <string name="milk_saved">Milk saved</string>
@@ -179,7 +185,6 @@
     <string name="assign_batch">Assign batch</string>
     <string name="batch_assigned">Batch updated</string>
     <string name="err_no_batches">Create a batch first</string>
-    <string name="d_batch">Batch</string>
 
     <string name="add_weight">Add weight</string>
     <string name="weight_kg">Weight (kg)</string>
@@ -224,4 +229,172 @@
     <string name="bt_insemination">Insemination</string>
     <string name="bt_preg_pos">Pregnancy check: pregnant</string>
     <string name="bt_preg_neg">Pregnancy check: not pregnant</string>
+
+    <!-- ===== Phase 4: Health, vaccines, contacts, system ===== -->
+    <string name="vaccines">Vaccination schedule</string>
+    <string name="no_vaccines">No vaccines yet. Add the common ones or your own.</string>
+    <string name="add_common_vaccines">Add common vaccines</string>
+    <string name="add_vaccine">Add vaccine</string>
+    <string name="vaccine_name">Vaccine or treatment name</string>
+    <string name="interval_days">Repeat every (days)</string>
+    <string name="last_given">Last given on</string>
+    <string name="mark_given">Mark as given</string>
+    <string name="cost_optional">Cost (৳, optional)</string>
+    <string name="v_overdue">Overdue</string>
+    <string name="v_due_soon">Due soon</string>
+    <string name="v_ok">On schedule</string>
+    <string name="v_never">Not given yet</string>
+    <string name="v_last">Last given: %1$s</string>
+    <string name="v_every">every %1$s days</string>
+    <string name="v_next">Next: %1$s</string>
+    <string name="vac_fmd">FMD vaccine</string>
+    <string name="vac_anthrax">Anthrax vaccine</string>
+    <string name="vac_hs">HS vaccine</string>
+    <string name="vac_bq">BQ vaccine</string>
+    <string name="vac_deworm">Deworming</string>
+    <string name="err_vaccine_name">Enter the vaccine name</string>
+
+    <string name="contacts">Contacts</string>
+    <string name="add_contact">Add contact</string>
+    <string name="from_contacts">From phone contacts</string>
+    <string name="role">Role</string>
+    <string name="call">Call</string>
+    <string name="send_sms">Send message</string>
+    <string name="delete">Delete</string>
+    <string name="err_name_phone">Enter a name and phone number</string>
+    <string name="pick_contact">Pick a contact</string>
+    <string name="contacts_permission_needed">To pick a contact, allow access to your phone contacts. They stay on your phone.</string>
+    <string name="allow_access">Allow access</string>
+    <string name="contacts_denied">Permission denied. You can still type contacts in by hand, or allow access in Settings.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="no_contacts">No contacts found</string>
+    <string name="no_saved_contacts">No contacts yet. Tap + to add the vet or a buyer.</string>
+    <string name="search_contacts">Search contacts</string>
+
+    <string name="ch_reminders">Farm reminders</string>
+    <string name="ch_monitor">Farm monitor</string>
+    <string name="monitor_title">Farm monitor</string>
+    <string name="monitor_starting">Starting...</string>
+    <string name="monitor_text">Animals: %1$s  |  Milk today: %2$s L</string>
+    <string name="monitor_big">Low stock: %1$s  |  Vaccines due: %2$s  |  Calving soon: %3$s</string>
+    <string name="monitor_stop_action">Stop</string>
+    <string name="monitor_start">Start farm monitor</string>
+    <string name="monitor_stop">Stop farm monitor</string>
+    <string name="banner_airplane">Airplane mode is on. Online features are paused. Your records are safe on this phone.</string>
+    <string name="banner_battery">Battery is low. Save your records and charge the phone.</string>
+    <string name="rem_vaccines">%1$s vaccine(s) due or overdue</string>
+    <string name="rem_calving">%1$s cow(s) due to calve within 14 days</string>
+    <string name="rem_lowstock">%1$s feed item(s) running low</string>
+    <string name="rem_followups">%1$s treatment follow-up(s) due</string>
+    <string name="rem_withdrawals">%1$s animal(s) in medicine withdrawal: do not sell their milk or meat</string>
+
+    <string name="health_record">Health record</string>
+    <string name="condition">Condition</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="temperature">Temperature (°C)</string>
+    <string name="treatment">Medicine or treatment</string>
+    <string name="vet_name">Vet name</string>
+    <string name="treatment_cost">Treatment cost (৳)</string>
+    <string name="withdrawal_days">Withdrawal period (days)</string>
+    <string name="followup_days">Follow-up after (days, optional)</string>
+    <string name="quarantine_start">Start quarantine</string>
+    <string name="quarantine_end">End quarantine</string>
+    <string name="mark_recovered">Mark recovered</string>
+    <string name="recovered_done">Marked as recovered</string>
+    <string name="quarantine_updated">Quarantine updated</string>
+    <string name="i_withdrawal">Do not sell milk or meat until %1$s (medicine withdrawal)</string>
+    <string name="i_followup">Treatment follow-up on: %1$s</string>
+    <string name="hs_ongoing">ongoing</string>
+    <string name="hs_recovered">recovered</string>
+    <string name="withdrawal_title">Medicine withdrawal</string>
+    <string name="withdrawal_milk_warning">This cow was treated with medicine. Do not sell her milk until %1$s. Save the record anyway?</string>
+    <string name="save_anyway">Save anyway</string>
+    <string name="sell_animal">Sell animal</string>
+    <string name="sale_price">Sale price (৳)</string>
+    <string name="buyer">Buyer (optional)</string>
+    <string name="sold_done">Animal marked as sold</string>
+    <string name="err_price">Enter a price above 0</string>
+
+    <!-- ===== Phase 5: Finance, profit, customers ===== -->
+    <string name="finance">Finance</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="profit">Profit</string>
+    <string name="add_income">+ Income</string>
+    <string name="add_expense">+ Expense</string>
+    <string name="amount">Amount (৳)</string>
+    <string name="note">Note (optional)</string>
+    <string name="no_finance">No records this month.</string>
+    <string name="export_pdf">PDF report</string>
+    <string name="export_csv">CSV file</string>
+    <string name="share_report">Share report</string>
+    <string name="export_failed">Could not create the file</string>
+    <string name="err_amount">Enter an amount above 0</string>
+    <string name="s_income">Income: ৳%1$s</string>
+    <string name="s_expense">Expense: ৳%1$s</string>
+    <string name="s_profit">Profit: ৳%1$s</string>
+    <string name="profit_report">Profit report</string>
+    <string name="p_by_animal">Animals</string>
+    <string name="p_by_batch">Batches</string>
+    <string name="p_by_group">Groups</string>
+    <string name="p_income_cost">Income ৳%1$s  |  Cost ৳%2$s</string>
+    <string name="p_loss">Loss</string>
+    <string name="p_note">Estimate: feed cost is shared equally inside each group, and milk income is shared by liters.</string>
+
+    <string name="customers">Milk customers</string>
+    <string name="add_customer">Add customer</string>
+    <string name="rate_per_liter">Rate per liter (৳)</string>
+    <string name="fmt_rate">৳%1$s per liter</string>
+    <string name="due">Due</string>
+    <string name="no_customers">No customers yet. Tap + to add one.</string>
+    <string name="no_entries">No entries yet</string>
+    <string name="ledger_delivery">Add delivery</string>
+    <string name="ledger_payment">Receive payment</string>
+    <string name="ledger_share">Share bill</string>
+    <string name="delivery">Delivery</string>
+    <string name="payment">Payment</string>
+    <string name="balance_due">Balance due: ৳%1$s</string>
+    <string name="bill_title">Milk bill: %1$s</string>
+    <string name="bill_delivery">%1$s  Delivery  %2$s L  ৳%3$s</string>
+    <string name="bill_payment">%1$s  Payment  ৳%2$s</string>
+    <string name="r_title">Monthly report</string>
+    <string name="r_income_by">Income by category</string>
+    <string name="r_expense_by">Expense by category</string>
+    <string name="vaccines_due">Vaccines due</string>
+    <string name="profit_month">Profit this month (৳)</string>
+
+    <!-- ===== Lists used by dialogs (codes stay the same in every language) ===== -->
+    <string-array name="condition_codes">
+        <item>MASTITIS</item><item>FMD</item><item>LUMPY_SKIN</item><item>HS</item>
+        <item>BQ</item><item>ANTHRAX</item><item>BLOAT</item><item>DIARRHEA</item>
+        <item>WORMS</item><item>TICKS</item><item>FOOT_ROT</item><item>MILK_FEVER</item>
+        <item>INFERTILITY</item><item>OTHER</item>
+    </string-array>
+    <string-array name="condition_labels">
+        <item>Mastitis</item><item>Foot and mouth disease (FMD)</item><item>Lumpy skin disease</item>
+        <item>Hemorrhagic septicemia (HS)</item><item>Black quarter (BQ)</item><item>Anthrax</item>
+        <item>Bloat</item><item>Diarrhea</item><item>Worms</item><item>Ticks</item>
+        <item>Foot rot or lameness</item><item>Milk fever</item><item>Infertility</item><item>Other</item>
+    </string-array>
+    <string-array name="role_codes">
+        <item>VET</item><item>BUYER</item><item>SUPPLIER</item><item>OTHER</item>
+    </string-array>
+    <string-array name="role_labels">
+        <item>Veterinarian</item><item>Buyer or customer</item><item>Supplier</item><item>Other</item>
+    </string-array>
+    <string-array name="income_codes">
+        <item>MILK</item><item>ANIMAL_SALE</item><item>CALF_SALE</item><item>MANURE</item><item>OTHER_INCOME</item>
+    </string-array>
+    <string-array name="income_labels">
+        <item>Milk sales</item><item>Animal sale</item><item>Calf sale</item><item>Manure sale</item><item>Other income</item>
+    </string-array>
+    <string-array name="expense_codes">
+        <item>FEED</item><item>MEDICINE</item><item>LABOR</item><item>TRANSPORT</item>
+        <item>ELECTRICITY</item><item>EQUIPMENT</item><item>ANIMAL_PURCHASE</item><item>OTHER_EXPENSE</item>
+    </string-array>
+    <string-array name="expense_labels">
+        <item>Feed</item><item>Medicine and vet</item><item>Labor</item><item>Transport</item>
+        <item>Electricity and water</item><item>Equipment</item><item>Animal purchase</item><item>Other expense</item>
+    </string-array>
+
 </resources>

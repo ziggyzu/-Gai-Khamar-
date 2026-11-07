@@ -3,10 +3,8 @@ package com.gaikhamar.app.ui;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -14,8 +12,7 @@ import com.gaikhamar.app.R;
 import com.gaikhamar.app.data.Repository;
 import com.gaikhamar.app.data.entity.Animal;
 import com.gaikhamar.app.databinding.ActivityMilkBinding;
-import com.gaikhamar.app.databinding.DialogAddMilkBinding;
-import com.gaikhamar.app.util.InputUtil;
+import com.gaikhamar.app.util.FormDialog;
 import com.gaikhamar.app.util.LabelHelper;
 import com.gaikhamar.app.util.NumFmt;
 import com.gaikhamar.app.viewmodel.MilkViewModel;
@@ -38,7 +35,6 @@ public class MilkActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         b = ActivityMilkBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
-
         repo = Repository.get(this);
         vm = new ViewModelProvider(this).get(MilkViewModel.class);
 
@@ -55,7 +51,6 @@ public class MilkActivity extends BaseActivity {
         });
         vm.total.observe(this, t ->
                 b.tvSummary.setText(getString(R.string.total_milk, NumFmt.n(t == null ? 0 : t))));
-
         b.fabAdd.setOnClickListener(v -> showAddDialog());
     }
 
@@ -68,50 +63,54 @@ public class MilkActivity extends BaseActivity {
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    private boolean inWithdrawal(Animal a) {
+        return a.withdrawalUntil != null && !a.withdrawalUntil.isEmpty()
+                && a.withdrawalUntil.compareTo(vm.getDate()) >= 0;
+    }
+
     private void showAddDialog() {
         List<Animal> cows = vm.milkingCows.getValue();
         if (cows == null || cows.isEmpty()) {
             Toast.makeText(this, R.string.no_milking_cows, Toast.LENGTH_LONG).show();
             return;
         }
-
-        DialogAddMilkBinding d = DialogAddMilkBinding.inflate(getLayoutInflater());
-
         String[] cowLabels = new String[cows.size()];
         for (int i = 0; i < cows.size(); i++) {
             Animal a = cows.get(i);
-            boolean hasTag = a.earTag != null && !a.earTag.isEmpty();
-            cowLabels[i] = a.farmCattleId + (hasTag ? " (" + a.earTag + ")" : "");
+            boolean tag = a.earTag != null && !a.earTag.isEmpty();
+            cowLabels[i] = a.farmCattleId + (tag ? " (" + a.earTag + ")" : "") + (inWithdrawal(a) ? "  (!)" : "");
         }
-        d.spCow.setAdapter(new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, cowLabels));
-
         String[] sessionLabels = new String[SESSIONS.length];
-        for (int i = 0; i < SESSIONS.length; i++) {
-            sessionLabels[i] = LabelHelper.milkSession(this, SESSIONS[i]);
-        }
-        d.spSession.setAdapter(new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, sessionLabels));
+        for (int i = 0; i < SESSIONS.length; i++) sessionLabels[i] = LabelHelper.milkSession(this, SESSIONS[i]);
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.add_milk)
-                .setView(d.getRoot())
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.save, null)
-                .create();
-        dialog.show();
+        new FormDialog.Builder(this, R.string.add_milk)
+                .choice("cow", R.string.cow, cowLabels)
+                .choice("session", R.string.milk_session, sessionLabels)
+                .number("liters", R.string.liters)
+                .show(v -> {
+                    double liters = v.num("liters");
+                    if (liters <= 0) {
+                        Toast.makeText(this, R.string.err_liters, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    Animal cow = cows.get(v.choice("cow"));
+                    String session = SESSIONS[v.choice("session")];
+                    if (inWithdrawal(cow)) {
+                        new MaterialAlertDialogBuilder(this)
+                                .setTitle(R.string.withdrawal_title)
+                                .setMessage(getString(R.string.withdrawal_milk_warning, cow.withdrawalUntil))
+                                .setNegativeButton(R.string.cancel, null)
+                                .setPositiveButton(R.string.save_anyway, (d, w) -> saveMilk(cow, session, liters))
+                                .show();
+                    } else {
+                        saveMilk(cow, session, liters);
+                    }
+                    return true;
+                });
+    }
 
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            double liters = InputUtil.num(d.etLiters);
-            if (liters <= 0) {
-                Toast.makeText(this, R.string.err_liters, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Animal cow = cows.get(d.spCow.getSelectedItemPosition());
-            String session = SESSIONS[d.spSession.getSelectedItemPosition()];
-            repo.addMilk(cow.id, vm.getDate(), session, liters, ok ->
-                    Toast.makeText(this, R.string.milk_saved, Toast.LENGTH_SHORT).show());
-            dialog.dismiss();
-        });
+    private void saveMilk(Animal cow, String session, double liters) {
+        repo.addMilk(cow.id, vm.getDate(), session, liters,
+                ok -> Toast.makeText(this, R.string.milk_saved, Toast.LENGTH_SHORT).show());
     }
 }

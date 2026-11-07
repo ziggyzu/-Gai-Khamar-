@@ -25,4 +25,6 @@ public interface BatchDao {
             + "FROM batches b LEFT JOIN animals a ON a.batchId = b.id AND a.status = 'ACTIVE' "
             + "GROUP BY b.id ORDER BY b.id DESC")
     LiveData<List<BatchSummary>> summaries();
+    @Query("SELECT * FROM batches")
+    List<Batch> allSync();
 }

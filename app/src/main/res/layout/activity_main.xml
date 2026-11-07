@@ -47,6 +47,16 @@
             android:layout_marginBottom="12dp" />
 
         <TextView
+            android:id="@+id/tvSystemBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/amber_700"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/tvLowStockWarning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,21 +121,6 @@
                 app:tileLabel="@string/sick" />
 
             <com.gaikhamar.app.ui.cview.CountTileView
-                android:id="@+id/tileFeedToday"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:tileLabel="@string/feed_today" />
-
-            <com.gaikhamar.app.ui.cview.CountTileView
-                android:id="@+id/tileLowStock"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="6dp"
-                app:tileLabel="@string/low_stock" />
-            <com.gaikhamar.app.ui.cview.CountTileView
                 android:id="@+id/tileMilkToday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,12 +129,44 @@
                 app:tileLabel="@string/milk_today" />
 
             <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileFeedToday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/feed_today" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
                 android:id="@+id/tileCalvingSoon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_margin="6dp"
                 app:tileLabel="@string/calving_soon" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileLowStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/low_stock" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileVaccines"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/vaccines_due" />
+
+            <com.gaikhamar.app.ui.cview.CountTileView
+                android:id="@+id/tileProfit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                app:tileLabel="@string/profit_month" />
         </GridLayout>
 
         <TextView
@@ -151,53 +178,127 @@
             android:textColor="@color/green_900"
             android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAnimals"
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/animals" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:columnCount="2">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/add_animal" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMilk"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/milk_records" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAnimals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/animals"
+                android:textSize="13sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBatches"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/batches" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddAnimal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/add_animal"
+                android:textSize="13sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFeedLog"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/feed_log" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMilk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/milk_records"
+                android:textSize="13sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFeedStock"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/feed_stock" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBatches"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/batches"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFeedLog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/feed_log"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFeedStock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/feed_stock"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVaccines"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/vaccines"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFinance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/finance"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCustomers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/customers"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnProfitReport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/profit_report"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContacts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/contacts"
+                android:textSize="13sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMonitor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:text="@string/monitor_start"
+                android:textSize="13sp" />
+        </GridLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="@string/logout" />
     </LinearLayout>
 </ScrollView>

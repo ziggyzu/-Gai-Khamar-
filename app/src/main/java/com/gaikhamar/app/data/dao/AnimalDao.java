@@ -55,4 +55,14 @@ public interface AnimalDao {
             + "AND IFNULL(expectedCalvingDate, '') != '' "
             + "AND expectedCalvingDate BETWEEN :from AND :to")
     LiveData<Integer> countCalvingBetween(String from, String to);
+    @Query("SELECT * FROM animals")
+    List<Animal> allSync();
+
+    @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' AND IFNULL(expectedCalvingDate, '') != '' "
+            + "AND expectedCalvingDate BETWEEN :from AND :to")
+    int calvingBetweenSync(String from, String to);
+
+    @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' AND IFNULL(withdrawalUntil, '') != '' "
+            + "AND withdrawalUntil >= :today")
+    int withdrawalCountSync(String today);
 }

@@ -6,30 +6,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.gaikhamar.app.data.dao.AnimalDao;
-import com.gaikhamar.app.data.dao.BatchDao;
-import com.gaikhamar.app.data.dao.BreedingDao;
-import com.gaikhamar.app.data.dao.CalvingDao;
-import com.gaikhamar.app.data.dao.FeedLogDao;
-import com.gaikhamar.app.data.dao.FeedPurchaseDao;
-import com.gaikhamar.app.data.dao.FeedTypeDao;
-import com.gaikhamar.app.data.dao.MilkDao;
-import com.gaikhamar.app.data.dao.UserDao;
-import com.gaikhamar.app.data.dao.WeightDao;
-import com.gaikhamar.app.data.entity.Animal;
-import com.gaikhamar.app.data.entity.Batch;
-import com.gaikhamar.app.data.entity.BreedingRecord;
-import com.gaikhamar.app.data.entity.CalvingRecord;
-import com.gaikhamar.app.data.entity.FeedLog;
-import com.gaikhamar.app.data.entity.FeedPurchase;
-import com.gaikhamar.app.data.entity.FeedType;
-import com.gaikhamar.app.data.entity.MilkRecord;
-import com.gaikhamar.app.data.entity.User;
-import com.gaikhamar.app.data.entity.WeightRecord;
+import com.gaikhamar.app.data.dao.*;
+import com.gaikhamar.app.data.entity.*;
 
-@Database(entities = {User.class, Animal.class, FeedType.class, FeedLog.class,
-        FeedPurchase.class, WeightRecord.class, Batch.class, MilkRecord.class,
-        BreedingRecord.class, CalvingRecord.class}, version = 3, exportSchema = false)
+@Database(entities = {User.class, Animal.class, FeedType.class, FeedLog.class, FeedPurchase.class,
+        WeightRecord.class, Batch.class, MilkRecord.class, BreedingRecord.class, CalvingRecord.class,
+        HealthRecord.class, Vaccination.class, FarmContact.class, FinanceRecord.class,
+        Customer.class, LedgerEntry.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -42,6 +25,11 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MilkDao milkDao();
     public abstract BreedingDao breedingDao();
     public abstract CalvingDao calvingDao();
+    public abstract HealthDao healthDao();
+    public abstract VaccinationDao vaccinationDao();
+    public abstract ContactDao contactDao();
+    public abstract FinanceDao financeDao();
+    public abstract CustomerDao customerDao();
 
     private static volatile AppDatabase INSTANCE;
 
@@ -49,10 +37,8 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                                    context.getApplicationContext(),
-                                    AppDatabase.class,
-                                    "gai_khamar.db")
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, "gai_khamar.db")
                             .fallbackToDestructiveMigration() // dev only: resets data on version change
                             .build();
                 }

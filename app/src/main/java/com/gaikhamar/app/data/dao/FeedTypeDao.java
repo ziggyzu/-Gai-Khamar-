@@ -26,4 +26,6 @@ public interface FeedTypeDao {
 
     @Query("SELECT COUNT(*) FROM feed_types WHERE stockKg <= lowStockLevelKg")
     LiveData<Integer> countLowStock();
+    @Query("SELECT COUNT(*) FROM feed_types WHERE stockKg <= lowStockLevelKg")
+    int lowStockCountSync();
 }

@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ===== App and login ===== -->
     <string name="app_name">গাই খামার</string>
     <string name="tagline">গবাদিপশু ও দুধ খামার ব্যবস্থাপনা</string>
     <string name="lang_english">English</string>
     <string name="lang_bangla">বাংলা</string>
-
     <string name="phone">ফোন নম্বর</string>
     <string name="password">পাসওয়ার্ড</string>
     <string name="confirm_password">পাসওয়ার্ড নিশ্চিত করুন</string>
@@ -16,6 +18,7 @@
     <string name="farm_code">খামারের কোড (২-৩টি ইংরেজি অক্ষর, যেমন KH)</string>
     <string name="welcome_user">স্বাগতম, %1$s</string>
 
+    <!-- ===== Dashboard and animals ===== -->
     <string name="total">মোট</string>
     <string name="beef">মাংসের গরু</string>
     <string name="dairy">দুধের গাভী</string>
@@ -80,8 +83,9 @@
     <string name="d_health">স্বাস্থ্য</string>
     <string name="d_status">অবস্থা</string>
     <string name="d_notes">মন্তব্য</string>
+    <string name="d_batch">ব্যাচ</string>
 
-    <!-- Values stored as codes in the database, shown as labels -->
+    <!-- Values stored as codes in the database -->
     <string name="ds_heifer">বকনা</string>
     <string name="ds_milking">দুধ দিচ্ছে</string>
     <string name="ds_dry">দুধ বন্ধ (শুকনো)</string>
@@ -99,10 +103,12 @@
     <string name="fmt_cost">খরচ: ৳%1$s</string>
     <string name="fmt_tag">ট্যাগ: %1$s</string>
     <string name="fmt_status">অবস্থা: %1$s</string>
-    <string name="fmt_calf_suffix"> (বাছুর)</string>
+    <string name="fmt_calf_suffix">" (বাছুর)"</string>
     <string name="fmt_kg">%1$s কেজি</string>
     <string name="fmt_money">৳%1$s</string>
-    <!-- Phase 2: Feed -->
+    <string name="fmt_liters">%1$s লিটার</string>
+
+    <!-- ===== Phase 2: Feed ===== -->
     <string name="feed_management">খাদ্য ব্যবস্থাপনা</string>
     <string name="feed_stock">খাদ্য মজুদ</string>
     <string name="feed_log">দৈনিক খাদ্য তালিকা</string>
@@ -147,7 +153,8 @@
     <string name="f_concentrate">দানাদার খাদ্য</string>
     <string name="f_silage">সাইলেজ</string>
     <string name="f_mineral">খনিজ মিশ্রণ</string>
-    <!-- Phase 3 -->
+
+    <!-- ===== Phase 3: Weight, batches, milk, breeding ===== -->
     <string name="milk_today">আজকের দুধ (লিটার)</string>
     <string name="calving_soon">শীঘ্রই বাচ্চা দেবে</string>
     <string name="milk_records">দুধের হিসাব</string>
@@ -159,7 +166,6 @@
     <string name="evening">বিকাল</string>
     <string name="liters">লিটার</string>
     <string name="total_milk">মোট দুধ: %1$s লিটার</string>
-    <string name="fmt_liters">%1$s লিটার</string>
     <string name="no_milk_records">এই দিনে দুধের হিসাব নেই।</string>
     <string name="no_milking_cows">কোনো দুধ দেওয়া গাভী নেই। আগে অবস্থা দুধ দিচ্ছে দিয়ে একটি গাভী যোগ করুন।</string>
     <string name="milk_saved">দুধের হিসাব সংরক্ষিত হয়েছে</string>
@@ -179,7 +185,6 @@
     <string name="assign_batch">ব্যাচ ঠিক করুন</string>
     <string name="batch_assigned">ব্যাচ আপডেট হয়েছে</string>
     <string name="err_no_batches">আগে একটি ব্যাচ তৈরি করুন</string>
-    <string name="d_batch">ব্যাচ</string>
 
     <string name="add_weight">ওজন যোগ করুন</string>
     <string name="weight_kg">ওজন (কেজি)</string>
@@ -224,4 +229,156 @@
     <string name="bt_insemination">প্রজনন</string>
     <string name="bt_preg_pos">গর্ভধারণ পরীক্ষা: গর্ভবতী</string>
     <string name="bt_preg_neg">গর্ভধারণ পরীক্ষা: গর্ভবতী নয়</string>
+
+    <!-- ===== Phase 4: Health, vaccines, contacts, system ===== -->
+    <string name="vaccines">টিকার সূচি</string>
+    <string name="no_vaccines">এখনও কোনো টিকা নেই। সাধারণ টিকাগুলো বা নিজের টিকা যোগ করুন।</string>
+    <string name="add_common_vaccines">সাধারণ টিকা যোগ করুন</string>
+    <string name="add_vaccine">টিকা যোগ করুন</string>
+    <string name="vaccine_name">টিকা বা চিকিৎসার নাম</string>
+    <string name="interval_days">কত দিন পরপর (দিন)</string>
+    <string name="last_given">সর্বশেষ দেওয়ার তারিখ</string>
+    <string name="mark_given">দেওয়া হয়েছে</string>
+    <string name="cost_optional">খরচ (৳, ঐচ্ছিক)</string>
+    <string name="v_overdue">মেয়াদ পেরিয়ে গেছে</string>
+    <string name="v_due_soon">শীঘ্রই দিতে হবে</string>
+    <string name="v_ok">ঠিক আছে</string>
+    <string name="v_never">এখনও দেওয়া হয়নি</string>
+    <string name="v_last">সর্বশেষ: %1$s</string>
+    <string name="v_every">প্রতি %1$s দিনে</string>
+    <string name="v_next">পরবর্তী: %1$s</string>
+    <string name="vac_fmd">ক্ষুরারোগের টিকা</string>
+    <string name="vac_anthrax">তড়কার টিকা</string>
+    <string name="vac_hs">গলাফুলার টিকা</string>
+    <string name="vac_bq">বাদলার টিকা</string>
+    <string name="vac_deworm">কৃমিনাশক</string>
+    <string name="err_vaccine_name">টিকার নাম দিন</string>
+
+    <string name="contacts">যোগাযোগ</string>
+    <string name="add_contact">নতুন যোগাযোগ</string>
+    <string name="from_contacts">ফোনের কন্টাক্ট থেকে</string>
+    <string name="role">ধরন</string>
+    <string name="call">কল করুন</string>
+    <string name="send_sms">বার্তা পাঠান</string>
+    <string name="delete">মুছুন</string>
+    <string name="err_name_phone">নাম ও ফোন নম্বর দিন</string>
+    <string name="pick_contact">একটি কন্টাক্ট বাছুন</string>
+    <string name="contacts_permission_needed">কন্টাক্ট বাছতে ফোনের কন্টাক্ট দেখার অনুমতি দিন। কন্টাক্টগুলো ফোনেই থাকে।</string>
+    <string name="allow_access">অনুমতি দিন</string>
+    <string name="contacts_denied">অনুমতি দেওয়া হয়নি। আপনি হাতে লিখে কন্টাক্ট যোগ করতে পারেন, অথবা সেটিংসে গিয়ে অনুমতি দিন।</string>
+    <string name="open_settings">সেটিংস খুলুন</string>
+    <string name="no_contacts">কোনো কন্টাক্ট পাওয়া যায়নি</string>
+    <string name="no_saved_contacts">এখনও কোনো যোগাযোগ নেই। ডাক্তার বা ক্রেতা যোগ করতে + চাপুন।</string>
+    <string name="search_contacts">কন্টাক্ট খুঁজুন</string>
+
+    <string name="ch_reminders">খামারের মনে করিয়ে দেওয়া</string>
+    <string name="ch_monitor">খামার মনিটর</string>
+    <string name="monitor_title">খামার মনিটর</string>
+    <string name="monitor_starting">শুরু হচ্ছে...</string>
+    <string name="monitor_text">পশু: %1$s  |  আজকের দুধ: %2$s লিটার</string>
+    <string name="monitor_big">মজুদ কম: %1$s  |  টিকা বাকি: %2$s  |  শীঘ্রই প্রসব: %3$s</string>
+    <string name="monitor_stop_action">বন্ধ করুন</string>
+    <string name="monitor_start">খামার মনিটর চালু করুন</string>
+    <string name="monitor_stop">খামার মনিটর বন্ধ করুন</string>
+    <string name="banner_airplane">ফ্লাইট মোড চালু আছে। অনলাইন সুবিধা বন্ধ। আপনার তথ্য ফোনে নিরাপদ আছে।</string>
+    <string name="banner_battery">ব্যাটারি কম। তথ্য সংরক্ষণ করুন এবং ফোন চার্জ দিন।</string>
+    <string name="rem_vaccines">%1$sটি টিকা বাকি বা মেয়াদ পেরিয়েছে</string>
+    <string name="rem_calving">%1$sটি গাভীর ১৪ দিনের মধ্যে প্রসবের কথা</string>
+    <string name="rem_lowstock">%1$sটি খাদ্যের মজুদ কমে গেছে</string>
+    <string name="rem_followups">%1$sটি চিকিৎসার ফলো-আপ বাকি</string>
+    <string name="rem_withdrawals">%1$sটি পশু ওষুধের নিষেধকালে আছে: এদের দুধ বা মাংস বিক্রি করবেন না</string>
+
+    <string name="health_record">স্বাস্থ্য রেকর্ড</string>
+    <string name="condition">রোগের নাম</string>
+    <string name="symptoms">লক্ষণ</string>
+    <string name="temperature">তাপমাত্রা (°সে.)</string>
+    <string name="treatment">ওষুধ বা চিকিৎসা</string>
+    <string name="vet_name">ডাক্তারের নাম</string>
+    <string name="treatment_cost">চিকিৎসার খরচ (৳)</string>
+    <string name="withdrawal_days">নিষেধকাল (দিন)</string>
+    <string name="followup_days">কত দিন পর ফলো-আপ (ঐচ্ছিক)</string>
+    <string name="quarantine_start">আলাদা রাখা শুরু করুন</string>
+    <string name="quarantine_end">আলাদা রাখা শেষ করুন</string>
+    <string name="mark_recovered">সুস্থ হয়েছে</string>
+    <string name="recovered_done">সুস্থ হিসেবে চিহ্নিত</string>
+    <string name="quarantine_updated">আলাদা রাখার অবস্থা আপডেট হয়েছে</string>
+    <string name="i_withdrawal">%1$s পর্যন্ত দুধ বা মাংস বিক্রি করবেন না (ওষুধের নিষেধকাল)</string>
+    <string name="i_followup">চিকিৎসার ফলো-আপ: %1$s</string>
+    <string name="hs_ongoing">চলছে</string>
+    <string name="hs_recovered">সুস্থ</string>
+    <string name="withdrawal_title">ওষুধের নিষেধকাল</string>
+    <string name="withdrawal_milk_warning">এই গাভীকে ওষুধ দেওয়া হয়েছে। %1$s পর্যন্ত এর দুধ বিক্রি করবেন না। তবুও রেকর্ড সংরক্ষণ করবেন?</string>
+    <string name="save_anyway">তবুও সংরক্ষণ করুন</string>
+    <string name="sell_animal">পশু বিক্রি করুন</string>
+    <string name="sale_price">বিক্রয়মূল্য (৳)</string>
+    <string name="buyer">ক্রেতা (ঐচ্ছিক)</string>
+    <string name="sold_done">পশু বিক্রিত হিসেবে চিহ্নিত</string>
+    <string name="err_price">০-এর বেশি দাম দিন</string>
+
+    <!-- ===== Phase 5: Finance, profit, customers ===== -->
+    <string name="finance">আয়-ব্যয়</string>
+    <string name="income">আয়</string>
+    <string name="expense">খরচ</string>
+    <string name="profit">লাভ</string>
+    <string name="add_income">+ আয়</string>
+    <string name="add_expense">+ খরচ</string>
+    <string name="amount">পরিমাণ (৳)</string>
+    <string name="note">মন্তব্য (ঐচ্ছিক)</string>
+    <string name="no_finance">এই মাসে কোনো রেকর্ড নেই।</string>
+    <string name="export_pdf">পিডিএফ রিপোর্ট</string>
+    <string name="export_csv">সিএসভি ফাইল</string>
+    <string name="share_report">রিপোর্ট শেয়ার করুন</string>
+    <string name="export_failed">ফাইল তৈরি করা যায়নি</string>
+    <string name="err_amount">০-এর বেশি পরিমাণ দিন</string>
+    <string name="s_income">আয়: ৳%1$s</string>
+    <string name="s_expense">খরচ: ৳%1$s</string>
+    <string name="s_profit">লাভ: ৳%1$s</string>
+    <string name="profit_report">লাভ-ক্ষতির রিপোর্ট</string>
+    <string name="p_by_animal">পশু</string>
+    <string name="p_by_batch">ব্যাচ</string>
+    <string name="p_by_group">দল</string>
+    <string name="p_income_cost">আয় ৳%1$s  |  খরচ ৳%2$s</string>
+    <string name="p_loss">ক্ষতি</string>
+    <string name="p_note">আনুমানিক হিসাব: প্রতিটি দলের খাদ্য খরচ সমানভাবে ভাগ করা হয়েছে, আর দুধের আয় লিটার অনুযায়ী ভাগ করা হয়েছে।</string>
+
+    <string name="customers">দুধের ক্রেতা</string>
+    <string name="add_customer">ক্রেতা যোগ করুন</string>
+    <string name="rate_per_liter">প্রতি লিটারের দাম (৳)</string>
+    <string name="fmt_rate">প্রতি লিটার ৳%1$s</string>
+    <string name="due">বাকি</string>
+    <string name="no_customers">এখনও কোনো ক্রেতা নেই। যোগ করতে + চাপুন।</string>
+    <string name="no_entries">এখনও কোনো হিসাব নেই</string>
+    <string name="ledger_delivery">দুধ দেওয়া লিখুন</string>
+    <string name="ledger_payment">টাকা নিন</string>
+    <string name="ledger_share">বিল শেয়ার করুন</string>
+    <string name="delivery">দুধ দেওয়া</string>
+    <string name="payment">টাকা পাওয়া</string>
+    <string name="balance_due">বাকি টাকা: ৳%1$s</string>
+    <string name="bill_title">দুধের বিল: %1$s</string>
+    <string name="bill_delivery">%1$s  দুধ  %2$s লিটার  ৳%3$s</string>
+    <string name="bill_payment">%1$s  টাকা পাওয়া  ৳%2$s</string>
+    <string name="r_title">মাসিক রিপোর্ট</string>
+    <string name="r_income_by">খাতভিত্তিক আয়</string>
+    <string name="r_expense_by">খাতভিত্তিক খরচ</string>
+    <string name="vaccines_due">টিকা বাকি</string>
+    <string name="profit_month">এই মাসের লাভ (৳)</string>
+
+    <!-- ===== Lists used by dialogs (only the labels are translated) ===== -->
+    <string-array name="condition_labels">
+        <item>ওলান প্রদাহ (ম্যাস্টাইটিস)</item><item>ক্ষুরারোগ (এফএমডি)</item><item>লাম্পি স্কিন রোগ</item>
+        <item>গলাফুলা (এইচএস)</item><item>বাদলা (বিকিউ)</item><item>তড়কা (অ্যানথ্রাক্স)</item>
+        <item>পেট ফাঁপা</item><item>ডায়রিয়া</item><item>কৃমি</item><item>আঁটালি (টিক)</item>
+        <item>পায়ের ঘা বা খোঁড়ানো</item><item>দুধ জ্বর</item><item>বন্ধ্যাত্ব (গর্ভধারণে সমস্যা)</item><item>অন্যান্য</item>
+    </string-array>
+    <string-array name="role_labels">
+        <item>পশু চিকিৎসক</item><item>ক্রেতা</item><item>সরবরাহকারী</item><item>অন্যান্য</item>
+    </string-array>
+    <string-array name="income_labels">
+        <item>দুধ বিক্রি</item><item>পশু বিক্রি</item><item>বাছুর বিক্রি</item><item>গোবর বিক্রি</item><item>অন্য আয়</item>
+    </string-array>
+    <string-array name="expense_labels">
+        <item>খাদ্য</item><item>ওষুধ ও চিকিৎসা</item><item>শ্রমিক</item><item>পরিবহন</item>
+        <item>বিদ্যুৎ ও পানি</item><item>সরঞ্জাম</item><item>পশু ক্রয়</item><item>অন্য খরচ</item>
+    </string-array>
+
 </resources>

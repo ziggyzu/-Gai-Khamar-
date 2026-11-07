@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.gaikhamar.app.data.entity.FeedLog;
+import com.gaikhamar.app.data.entity.CategoryTotal;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface FeedLogDao {
 
     @Query("SELECT IFNULL(SUM(totalCost), 0) FROM feed_logs WHERE date = :date")
     LiveData<Double> totalCost(String date);
+    @Query("SELECT groupCode AS category, SUM(totalCost) AS total FROM feed_logs GROUP BY groupCode")
+    List<CategoryTotal> costByGroupSync();
 }

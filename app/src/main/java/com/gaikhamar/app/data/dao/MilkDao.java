@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.gaikhamar.app.data.entity.MilkRecord;
+import com.gaikhamar.app.data.entity.AnimalLiters;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface MilkDao {
     @Query("SELECT IFNULL(SUM(liters), 0) FROM milk_records "
             + "WHERE animalId = :animalId AND date BETWEEN :from AND :to")
     LiveData<Double> sumRange(long animalId, String from, String to);
+    @Query("SELECT animalId AS animalId, SUM(liters) AS liters FROM milk_records GROUP BY animalId")
+    List<AnimalLiters> litersByAnimalSync();
 }

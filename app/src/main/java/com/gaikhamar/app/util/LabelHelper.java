@@ -73,4 +73,26 @@ public final class LabelHelper {
             default:                   return code;
         }
     }
+    private static String fromArray(Context c, int codesRes, int labelsRes, String code) {
+        String[] codes = c.getResources().getStringArray(codesRes);
+        String[] labels = c.getResources().getStringArray(labelsRes);
+        for (int i = 0; i < codes.length && i < labels.length; i++) {
+            if (codes[i].equals(code)) return labels[i];
+        }
+        return code == null ? "" : code;
+    }
+
+    public static String condition(Context c, String code) {
+        return fromArray(c, R.array.condition_codes, R.array.condition_labels, code);
+    }
+
+    public static String role(Context c, String code) {
+        return fromArray(c, R.array.role_codes, R.array.role_labels, code);
+    }
+
+    public static String finCategory(Context c, String code) {
+        String s = fromArray(c, R.array.income_codes, R.array.income_labels, code);
+        if (s.equals(code)) s = fromArray(c, R.array.expense_codes, R.array.expense_labels, code);
+        return s;
+    }
 }

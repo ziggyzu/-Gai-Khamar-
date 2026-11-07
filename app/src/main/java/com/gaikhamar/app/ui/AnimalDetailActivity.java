@@ -2,12 +2,8 @@ package com.gaikhamar.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.gaikhamar.app.R;
@@ -15,14 +11,11 @@ import com.gaikhamar.app.data.Repository;
 import com.gaikhamar.app.data.entity.Animal;
 import com.gaikhamar.app.data.entity.Batch;
 import com.gaikhamar.app.data.entity.BreedingRecord;
+import com.gaikhamar.app.data.entity.HealthRecord;
 import com.gaikhamar.app.data.entity.WeightRecord;
 import com.gaikhamar.app.databinding.ActivityAnimalDetailBinding;
-import com.gaikhamar.app.databinding.DialogAddWeightBinding;
-import com.gaikhamar.app.databinding.DialogBreedingBinding;
-import com.gaikhamar.app.databinding.DialogCalvingBinding;
-import com.gaikhamar.app.databinding.DialogNumberBinding;
 import com.gaikhamar.app.util.DateUtil;
-import com.gaikhamar.app.util.InputUtil;
+import com.gaikhamar.app.util.FormDialog;
 import com.gaikhamar.app.util.LabelHelper;
 import com.gaikhamar.app.util.NumFmt;
 import com.gaikhamar.app.util.QrUtil;
@@ -48,6 +41,7 @@ public class AnimalDetailActivity extends BaseActivity {
     private Animal animal;
     private List<WeightRecord> weights;
     private List<BreedingRecord> breeding;
+    private List<HealthRecord> health;
     private List<Batch> batches;
     private double milk7 = 0;
     private boolean qrShown = false;
@@ -57,43 +51,44 @@ public class AnimalDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         b = ActivityAnimalDetailBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
-
         repo = Repository.get(this);
         session = new SessionManager(this);
         animalId = getIntent().getLongExtra(EXTRA_ID, -1);
 
         AnimalViewModel vm = new ViewModelProvider(this).get(AnimalViewModel.class);
         BatchViewModel bvm = new ViewModelProvider(this).get(BatchViewModel.class);
-
         vm.getAnimal(animalId).observe(this, a -> { animal = a; refresh(); });
         vm.weights(animalId).observe(this, l -> { weights = l; refresh(); });
         vm.breeding(animalId).observe(this, l -> { breeding = l; refresh(); });
         vm.milkLast7(animalId).observe(this, v -> { milk7 = v == null ? 0 : v; refresh(); });
+        repo.healthRecords(animalId).observe(this, l -> { health = l; refresh(); });
         bvm.batches.observe(this, l -> { batches = l; refresh(); });
 
         b.btnBack.setOnClickListener(v -> finish());
 
-        // Beef and calf actions
         b.btnAddWeight.setOnClickListener(v -> showAddWeight());
         b.btnSalePrice.setOnClickListener(v -> showSalePrice());
         b.btnAssignBatch.setOnClickListener(v -> showAssignBatch());
 
-        // Dairy actions
-        b.btnHeat.setOnClickListener(v -> showBreedingDialog("HEAT"));
-        b.btnInsemination.setOnClickListener(v -> showBreedingDialog("INSEMINATION"));
-        b.btnPregCheck.setOnClickListener(v -> showBreedingDialog("PREGNANCY"));
-        b.btnCalving.setOnClickListener(v -> showCalvingDialog());
-        b.btnDryOff.setOnClickListener(v -> showDryOffDialog());
+        b.btnHeat.setOnClickListener(v -> showHeat());
+        b.btnInsemination.setOnClickListener(v -> showInsemination());
+        b.btnPregCheck.setOnClickListener(v -> showPregnancyCheck());
+        b.btnCalving.setOnClickListener(v -> showCalving());
+        b.btnDryOff.setOnClickListener(v -> showDryOff());
+
+        b.btnHealthRecord.setOnClickListener(v -> showHealthRecord());
+        b.btnQuarantine.setOnClickListener(v -> repo.toggleQuarantine(animalId, ok -> toast(R.string.quarantine_updated)));
+        b.btnRecovered.setOnClickListener(v -> repo.markRecovered(animalId, ok -> toast(R.string.recovered_done)));
+        b.btnSell.setOnClickListener(v -> showSell());
     }
 
-    // ------------------------------------------------------------------
-    // Screen content
-    // ------------------------------------------------------------------
+    // ---------------------------------------------------------------- screen
 
     private void refresh() {
         if (animal == null) return;
         Animal a = animal;
         boolean dairy = "DAIRY".equals(a.category);
+        boolean active = "ACTIVE".equals(a.status);
 
         b.tvId.setText(a.farmCattleId);
         if (!qrShown) {
@@ -104,8 +99,11 @@ public class AnimalDetailActivity extends BaseActivity {
             }
         }
 
-        b.groupBeefActions.setVisibility(dairy ? View.GONE : View.VISIBLE);
-        b.groupDairyActions.setVisibility(dairy ? View.VISIBLE : View.GONE);
+        b.groupBeefActions.setVisibility(active && !dairy ? View.VISIBLE : View.GONE);
+        b.groupDairyActions.setVisibility(active && dairy ? View.VISIBLE : View.GONE);
+        b.groupCommonActions.setVisibility(active ? View.VISIBLE : View.GONE);
+        b.btnQuarantine.setText("QUARANTINE".equals(a.healthStatus) ? R.string.quarantine_end : R.string.quarantine_start);
+        b.btnRecovered.setVisibility("HEALTHY".equals(a.healthStatus) ? View.GONE : View.VISIBLE);
 
         // Details
         StringBuilder sb = new StringBuilder();
@@ -116,15 +114,9 @@ public class AnimalDetailActivity extends BaseActivity {
         line(sb, R.string.d_gender, LabelHelper.gender(this, a.gender));
         line(sb, R.string.d_dob, a.dateOfBirth);
         line(sb, R.string.d_purchase_date, a.purchaseDate);
-        if (a.purchasePrice > 0) {
-            line(sb, R.string.d_purchase_price, getString(R.string.fmt_money, NumFmt.n(a.purchasePrice)));
-        }
-        if (a.currentWeightKg > 0) {
-            line(sb, R.string.d_current_weight, getString(R.string.fmt_kg, NumFmt.n(a.currentWeightKg)));
-        }
-        if (a.targetWeightKg > 0) {
-            line(sb, R.string.d_target_weight, getString(R.string.fmt_kg, NumFmt.n(a.targetWeightKg)));
-        }
+        if (a.purchasePrice > 0) line(sb, R.string.d_purchase_price, getString(R.string.fmt_money, NumFmt.n(a.purchasePrice)));
+        if (a.currentWeightKg > 0) line(sb, R.string.d_current_weight, getString(R.string.fmt_kg, NumFmt.n(a.currentWeightKg)));
+        if (a.targetWeightKg > 0) line(sb, R.string.d_target_weight, getString(R.string.fmt_kg, NumFmt.n(a.targetWeightKg)));
         line(sb, R.string.d_dairy_status, LabelHelper.dairyStatus(this, a.dairyStatus));
         if (a.batchId > 0) line(sb, R.string.d_batch, batchName(a.batchId));
         line(sb, R.string.d_mother, a.motherId);
@@ -137,24 +129,34 @@ public class AnimalDetailActivity extends BaseActivity {
         // Insights
         StringBuilder in = new StringBuilder();
         if (dairy) dairyInsights(a, in); else beefInsights(a, in);
+        commonInsights(a, in);
         b.tvInsights.setText(in.toString().trim());
-        b.tvInsightsTitle.setVisibility(in.length() == 0 ? View.GONE : View.VISIBLE);
-        b.tvInsights.setVisibility(in.length() == 0 ? View.GONE : View.VISIBLE);
+        int vis = in.length() == 0 ? View.GONE : View.VISIBLE;
+        b.tvInsightsTitle.setVisibility(vis);
+        b.tvInsights.setVisibility(vis);
 
         // History
         StringBuilder h = new StringBuilder();
         if (weights != null) {
             for (int i = 0; i < Math.min(8, weights.size()); i++) {
                 WeightRecord w = weights.get(i);
-                h.append(w.date).append("  -  ")
-                        .append(getString(R.string.fmt_kg, NumFmt.n(w.weightKg))).append("\n");
+                h.append(w.date).append("  -  ").append(getString(R.string.fmt_kg, NumFmt.n(w.weightKg))).append("\n");
             }
         }
         if (breeding != null) {
             for (int i = 0; i < Math.min(8, breeding.size()); i++) {
                 BreedingRecord r = breeding.get(i);
                 h.append(r.date).append("  -  ").append(LabelHelper.breedingType(this, r.type));
-                if (r.notes != null && !r.notes.isEmpty()) h.append(" (").append(r.notes).append(")");
+                if (notEmpty(r.notes)) h.append(" (").append(r.notes).append(")");
+                h.append("\n");
+            }
+        }
+        if (health != null) {
+            for (int i = 0; i < Math.min(8, health.size()); i++) {
+                HealthRecord r = health.get(i);
+                h.append(r.date).append("  -  ").append(LabelHelper.condition(this, r.condition));
+                if (notEmpty(r.treatment)) h.append(" (").append(r.treatment).append(")");
+                h.append("  -  ").append(getString("ONGOING".equals(r.status) ? R.string.hs_ongoing : R.string.hs_recovered));
                 h.append("\n");
             }
         }
@@ -162,7 +164,6 @@ public class AnimalDetailActivity extends BaseActivity {
     }
 
     private void beefInsights(Animal a, StringBuilder in) {
-        // Average daily gain from the oldest to the newest weight record
         if (weights != null && weights.size() >= 2) {
             WeightRecord newest = weights.get(0);
             WeightRecord oldest = weights.get(weights.size() - 1);
@@ -176,8 +177,7 @@ public class AnimalDetailActivity extends BaseActivity {
             if (a.currentWeightKg >= a.targetWeightKg) {
                 in.append(getString(R.string.i_target_reached)).append("\n");
             } else {
-                in.append(getString(R.string.i_weight_left,
-                        NumFmt.n(a.targetWeightKg - a.currentWeightKg))).append("\n");
+                in.append(getString(R.string.i_weight_left, NumFmt.n(a.targetWeightKg - a.currentWeightKg))).append("\n");
             }
         }
         if (a.expectedPricePerKg > 0 && a.currentWeightKg > 0) {
@@ -193,39 +193,42 @@ public class AnimalDetailActivity extends BaseActivity {
             long days = DateUtil.daysBetween(a.lactationStartDate, today);
             in.append(getString(R.string.i_lactation, String.valueOf(Math.max(0, days)))).append("\n");
         }
-        if (milk7 > 0) {
-            in.append(getString(R.string.i_milk7, NumFmt.n(milk7 / 7.0))).append("\n");
-        }
+        if (milk7 > 0) in.append(getString(R.string.i_milk7, NumFmt.n(milk7 / 7.0))).append("\n");
         if (notEmpty(a.lastHeatDate)) {
             in.append(getString(R.string.i_next_heat, DateUtil.plusDays(a.lastHeatDate, 21))).append("\n");
         }
-        if (notEmpty(a.lastInseminationDate)) {
-            in.append(getString(R.string.i_last_insem, a.lastInseminationDate)).append("\n");
-        }
+        if (notEmpty(a.lastInseminationDate)) in.append(getString(R.string.i_last_insem, a.lastInseminationDate)).append("\n");
         if (notEmpty(a.expectedCalvingDate)) {
             long left = DateUtil.daysBetween(today, a.expectedCalvingDate);
             if (left >= 0) {
                 in.append(getString(R.string.i_calving, a.expectedCalvingDate, String.valueOf(left))).append("\n");
-                in.append(getString(R.string.i_dry_suggest,
-                        DateUtil.plusDays(a.expectedCalvingDate, -60))).append("\n");
+                in.append(getString(R.string.i_dry_suggest, DateUtil.plusDays(a.expectedCalvingDate, -60))).append("\n");
             } else {
                 in.append(getString(R.string.i_calving_overdue, a.expectedCalvingDate)).append("\n");
             }
         }
-        if ("DRY".equals(a.dairyStatus) && notEmpty(a.dryOffDate)) {
-            in.append(getString(R.string.i_dry_since, a.dryOffDate)).append("\n");
+        if ("DRY".equals(a.dairyStatus) && notEmpty(a.dryOffDate)) in.append(getString(R.string.i_dry_since, a.dryOffDate)).append("\n");
+    }
+
+    private void commonInsights(Animal a, StringBuilder in) {
+        if (notEmpty(a.withdrawalUntil) && a.withdrawalUntil.compareTo(DateUtil.today()) >= 0) {
+            in.append(getString(R.string.i_withdrawal, a.withdrawalUntil)).append("\n");
+        }
+        if (health != null) {
+            for (HealthRecord r : health) {
+                if ("ONGOING".equals(r.status) && notEmpty(r.followUpDate)) {
+                    in.append(getString(R.string.i_followup, r.followUpDate)).append("\n");
+                    break;
+                }
+            }
         }
     }
 
-    private boolean notEmpty(String s) {
-        return s != null && !s.isEmpty();
-    }
+    private boolean notEmpty(String s) { return s != null && !s.isEmpty(); }
 
     private String batchName(long id) {
         if (batches != null) {
-            for (Batch bt : batches) {
-                if (bt.id == id) return bt.name;
-            }
+            for (Batch bt : batches) if (bt.id == id) return bt.name;
         }
         return String.valueOf(id);
     }
@@ -235,64 +238,33 @@ public class AnimalDetailActivity extends BaseActivity {
         sb.append(getString(labelRes)).append(": ").append(value).append("\n");
     }
 
-    private void toast(int res) {
-        Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
-    }
+    private void toast(int res) { Toast.makeText(this, res, Toast.LENGTH_SHORT).show(); }
 
-    // ------------------------------------------------------------------
-    // Beef actions
-    // ------------------------------------------------------------------
+    // --------------------------------------------------------------- beef
 
     private void showAddWeight() {
-        DialogAddWeightBinding d = DialogAddWeightBinding.inflate(getLayoutInflater());
-        InputUtil.dateField(this, d.etDate);
-
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.add_weight)
-                .setView(d.getRoot())
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.save, null)
-                .create();
-        dialog.show();
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            double kg = InputUtil.num(d.etWeight);
-            if (kg <= 0) {
-                toast(R.string.err_weight);
-                return;
-            }
-            repo.addWeight(animalId, InputUtil.text(d.etDate), kg, ok -> toast(R.string.weight_saved));
-            dialog.dismiss();
-        });
+        new FormDialog.Builder(this, R.string.add_weight)
+                .date("date", R.string.date)
+                .number("kg", R.string.weight_kg)
+                .show(v -> {
+                    if (v.num("kg") <= 0) { toast(R.string.err_weight); return false; }
+                    repo.addWeight(animalId, v.str("date"), v.num("kg"), ok -> toast(R.string.weight_saved));
+                    return true;
+                });
     }
 
     private void showSalePrice() {
-        DialogNumberBinding d = DialogNumberBinding.inflate(getLayoutInflater());
-        d.tilValue.setHint(getString(R.string.price_per_kg_live));
-        if (animal != null && animal.expectedPricePerKg > 0) {
-            d.etValue.setText(NumFmt.plain(animal.expectedPricePerKg));
-        }
-
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.set_sale_price)
-                .setView(d.getRoot())
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.save, null)
-                .create();
-        dialog.show();
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            double price = InputUtil.num(d.etValue);
-            repo.setExpectedPrice(animalId, price, ok -> toast(R.string.price_saved));
-            dialog.dismiss();
-        });
+        String preset = animal != null && animal.expectedPricePerKg > 0 ? NumFmt.plain(animal.expectedPricePerKg) : null;
+        new FormDialog.Builder(this, R.string.set_sale_price)
+                .number("price", R.string.price_per_kg_live, preset)
+                .show(v -> {
+                    repo.setExpectedPrice(animalId, v.num("price"), ok -> toast(R.string.price_saved));
+                    return true;
+                });
     }
 
     private void showAssignBatch() {
-        if (batches == null || batches.isEmpty()) {
-            toast(R.string.err_no_batches);
-            return;
-        }
+        if (batches == null || batches.isEmpty()) { toast(R.string.err_no_batches); return; }
         String[] labels = new String[batches.size() + 1];
         labels[0] = getString(R.string.no_batch);
         int selected = 0;
@@ -300,99 +272,115 @@ public class AnimalDetailActivity extends BaseActivity {
             labels[i + 1] = batches.get(i).name;
             if (animal != null && batches.get(i).id == animal.batchId) selected = i + 1;
         }
-
-        Spinner sp = new Spinner(this);
-        sp.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, labels));
-        sp.setSelection(selected);
-
-        FrameLayout box = new FrameLayout(this);
-        int pad = (int) (20 * getResources().getDisplayMetrics().density);
-        box.setPadding(pad, pad, pad, 0);
-        box.addView(sp);
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.assign_batch)
-                .setView(box)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.save, (dlg, which) -> {
-                    int pos = sp.getSelectedItemPosition();
+        new FormDialog.Builder(this, R.string.assign_batch)
+                .choice("batch", R.string.d_batch, labels, selected)
+                .show(v -> {
+                    int pos = v.choice("batch");
                     long id = pos == 0 ? 0 : batches.get(pos - 1).id;
                     repo.assignBatch(animalId, id, ok -> toast(R.string.batch_assigned));
-                })
-                .show();
+                    return true;
+                });
     }
 
-    // ------------------------------------------------------------------
-    // Dairy actions
-    // ------------------------------------------------------------------
+    // -------------------------------------------------------------- dairy
 
-    private void showBreedingDialog(String type) {
-        DialogBreedingBinding d = DialogBreedingBinding.inflate(getLayoutInflater());
-        InputUtil.dateField(this, d.etDate);
-        d.tilNotes.setVisibility("INSEMINATION".equals(type) ? View.VISIBLE : View.GONE);
-
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setView(d.getRoot())
-                .setNegativeButton(R.string.cancel, null);
-
-        if ("PREGNANCY".equals(type)) {
-            builder.setTitle(R.string.pregnancy_check)
-                    .setPositiveButton(R.string.pregnant,
-                            (dlg, w) -> saveBreeding("PREGNANCY_POSITIVE", d))
-                    .setNeutralButton(R.string.preg_no,
-                            (dlg, w) -> saveBreeding("PREGNANCY_NEGATIVE", d));
-        } else {
-            builder.setTitle("HEAT".equals(type) ? R.string.record_heat : R.string.record_insemination)
-                    .setPositiveButton(R.string.save, (dlg, w) -> saveBreeding(type, d));
-        }
-        builder.show();
+    private void showHeat() {
+        new FormDialog.Builder(this, R.string.record_heat)
+                .date("date", R.string.date)
+                .show(v -> {
+                    repo.addBreeding(animalId, "HEAT", v.str("date"), "", r -> toast(R.string.saved_ok));
+                    return true;
+                });
     }
 
-    private void saveBreeding(String type, DialogBreedingBinding d) {
-        String date = InputUtil.text(d.etDate);
-        String notes = InputUtil.text(d.etNotes);
-        repo.addBreeding(animalId, type, date, notes, result ->
-                toast(result == 1 ? R.string.preg_no_insem : R.string.saved_ok));
+    private void showInsemination() {
+        new FormDialog.Builder(this, R.string.record_insemination)
+                .date("date", R.string.date)
+                .text("notes", R.string.bull_semen)
+                .show(v -> {
+                    repo.addBreeding(animalId, "INSEMINATION", v.str("date"), v.str("notes"), r -> toast(R.string.saved_ok));
+                    return true;
+                });
     }
 
-    private void showCalvingDialog() {
-        DialogCalvingBinding d = DialogCalvingBinding.inflate(getLayoutInflater());
-        InputUtil.dateField(this, d.etDate);
+    private void showPregnancyCheck() {
+        String[] results = {getString(R.string.pregnant), getString(R.string.preg_no)};
+        new FormDialog.Builder(this, R.string.pregnancy_check)
+                .date("date", R.string.date)
+                .choice("res", R.string.pregnancy_check, results)
+                .show(v -> {
+                    String type = v.choice("res") == 0 ? "PREGNANCY_POSITIVE" : "PREGNANCY_NEGATIVE";
+                    repo.addBreeding(animalId, type, v.str("date"), "",
+                            r -> toast(r == 1 ? R.string.preg_no_insem : R.string.saved_ok));
+                    return true;
+                });
+    }
 
-        String[] genderLabels = new String[GENDER_CODES.length];
-        for (int i = 0; i < GENDER_CODES.length; i++) {
-            genderLabels[i] = LabelHelper.gender(this, GENDER_CODES[i]);
-        }
-        d.spGender.setAdapter(new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, genderLabels));
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.record_calving)
-                .setView(d.getRoot())
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.save, (dlg, w) -> {
-                    String gender = GENDER_CODES[d.spGender.getSelectedItemPosition()];
-                    repo.recordCalving(animalId, session.getFarmCode(),
-                            InputUtil.text(d.etDate), gender,
-                            InputUtil.num(d.etBirthWeight), InputUtil.text(d.etCalfTag),
-                            calf -> {
+    private void showCalving() {
+        String[] genders = new String[GENDER_CODES.length];
+        for (int i = 0; i < GENDER_CODES.length; i++) genders[i] = LabelHelper.gender(this, GENDER_CODES[i]);
+        new FormDialog.Builder(this, R.string.record_calving)
+                .date("date", R.string.date)
+                .choice("gender", R.string.gender, genders)
+                .number("kg", R.string.birth_weight)
+                .text("tag", R.string.calf_tag)
+                .show(v -> {
+                    repo.recordCalving(animalId, session.getFarmCode(), v.str("date"),
+                            GENDER_CODES[v.choice("gender")], v.num("kg"), v.str("tag"), calf -> {
                                 if (calf != null) {
-                                    Toast.makeText(this,
-                                            getString(R.string.calving_saved, calf.farmCattleId),
+                                    Toast.makeText(this, getString(R.string.calving_saved, calf.farmCattleId),
                                             Toast.LENGTH_LONG).show();
                                 }
                             });
-                })
-                .show();
+                    return true;
+                });
     }
 
-    private void showDryOffDialog() {
+    private void showDryOff() {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dry_off)
                 .setMessage(R.string.dry_off_confirm)
                 .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.yes, (dlg, w) ->
+                .setPositiveButton(R.string.yes, (d, w) ->
                         repo.dryOff(animalId, DateUtil.today(), ok -> toast(R.string.dry_off_done)))
                 .show();
+    }
+
+    // ------------------------------------------------------ health and sale
+
+    private void showHealthRecord() {
+        String[] codes = getResources().getStringArray(R.array.condition_codes);
+        String[] labels = getResources().getStringArray(R.array.condition_labels);
+        new FormDialog.Builder(this, R.string.health_record)
+                .date("date", R.string.date)
+                .choice("cond", R.string.condition, labels)
+                .text("symptoms", R.string.symptoms)
+                .number("temp", R.string.temperature)
+                .text("treatment", R.string.treatment)
+                .text("vet", R.string.vet_name)
+                .number("cost", R.string.treatment_cost)
+                .number("wd", R.string.withdrawal_days)
+                .number("follow", R.string.followup_days)
+                .show(v -> {
+                    String date = v.str("date");
+                    int follow = (int) v.num("follow");
+                    repo.addHealthRecord(animalId, date, codes[v.choice("cond")], v.str("symptoms"),
+                            v.num("temp"), v.str("treatment"), v.str("vet"), v.num("cost"),
+                            (int) v.num("wd"), follow > 0 ? DateUtil.plusDays(date, follow) : "",
+                            ok -> toast(R.string.saved_ok));
+                    return true;
+                });
+    }
+
+    private void showSell() {
+        new FormDialog.Builder(this, R.string.sell_animal)
+                .date("date", R.string.date)
+                .number("price", R.string.sale_price)
+                .text("buyer", R.string.buyer)
+                .show(v -> {
+                    if (v.num("price") <= 0) { toast(R.string.err_price); return false; }
+                    repo.sellAnimal(animalId, v.num("price"), v.str("buyer"), v.str("date"), ok -> toast(R.string.sold_done));
+                    return true;
+                });
     }
 }

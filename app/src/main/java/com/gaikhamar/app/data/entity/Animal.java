@@ -34,6 +34,7 @@ public class Animal {
     public String expectedCalvingDate;
     public String lactationStartDate;
     public String dryOffDate;
+    public String withdrawalUntil;   // do not sell milk or meat until this date
     public String notes;
     public long createdAt;
 }
