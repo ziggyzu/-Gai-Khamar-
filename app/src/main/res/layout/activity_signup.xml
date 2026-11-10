@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,13 +32,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/GKField"
-            android:hint="@string/phone">
+            android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPhone"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +66,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/GKField"
-            android:hint="@string/password">
+            android:hint="@string/password"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
@@ -76,7 +78,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/GKField"
-            android:hint="@string/confirm_password">
+            android:hint="@string/confirm_password"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etConfirm"
@@ -91,6 +94,21 @@
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:text="@string/create_account" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="@string/or_text" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoogle"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/signup_google" />
 
         <TextView
             android:id="@+id/tvBack"

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.format.DateUtils;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -19,20 +20,24 @@ import com.gaikhamar.app.system.FarmMonitorService;
 import com.gaikhamar.app.system.NotificationHelper;
 import com.gaikhamar.app.system.ReminderReceiver;
 import com.gaikhamar.app.system.SystemEventsReceiver;
+import com.gaikhamar.app.util.AppPrefs;
 import com.gaikhamar.app.util.LocaleHelper;
 import com.gaikhamar.app.util.NumFmt;
 import com.gaikhamar.app.util.SessionManager;
+import com.gaikhamar.app.util.WeatherHelper;
 import com.gaikhamar.app.viewmodel.AnimalViewModel;
 import com.gaikhamar.app.viewmodel.FeedViewModel;
 import com.gaikhamar.app.viewmodel.FinanceViewModel;
 import com.gaikhamar.app.viewmodel.HealthViewModel;
 import com.gaikhamar.app.viewmodel.MilkViewModel;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends BaseActivity {
 
     private static final String NOTIF_PERMISSION = "android.permission.POST_NOTIFICATIONS";
 
     private ActivityMainBinding b;
+    private AppPrefs prefs;
     private double todayCost = 0, monthIncome = 0, monthExpense = 0;
     private int animalCount = 0;
     private boolean airplane = false, batteryLow = false, receiverRegistered = false;
@@ -52,6 +57,7 @@ public class MainActivity extends BaseActivity {
 
         b = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+        prefs = new AppPrefs(this);
 
         b.tvWelcome.setText(getString(R.string.welcome_user, session.getName()));
         b.tvFarm.setText(session.getFarmName());
@@ -131,6 +137,9 @@ public class MainActivity extends BaseActivity {
         b.btnCustomers.setOnClickListener(v -> open(CustomersActivity.class));
         b.btnProfitReport.setOnClickListener(v -> open(ProfitActivity.class));
         b.btnContacts.setOnClickListener(v -> open(ContactsActivity.class));
+        b.btnMore.setOnClickListener(v -> open(MoreActivity.class));
+
+        b.tvWeather.setOnClickListener(v -> chooseDistrict());
 
         b.btnMonitor.setOnClickListener(v -> {
             Intent i = new Intent(this, FarmMonitorService.class);
@@ -159,6 +168,8 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         if (b != null) {
             b.btnMonitor.setText(FarmMonitorService.isRunning() ? R.string.monitor_stop : R.string.monitor_start);
+            updateSyncStatus();
+            refreshWeather();
         }
     }
 
@@ -193,6 +204,61 @@ public class MainActivity extends BaseActivity {
     private void updateCostPerAnimal() {
         double per = animalCount > 0 ? todayCost / animalCount : 0;
         b.tvCostPerAnimal.setText(getString(R.string.cost_per_animal, NumFmt.n(per)));
+    }
+
+    private void updateSyncStatus() {
+        long t = prefs.lastSync();
+        b.tvSyncStatus.setText(t == 0 ? getString(R.string.sync_never)
+                : getString(R.string.sync_last, DateUtils.formatDateTime(this, t,
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL)));
+    }
+
+    private void refreshWeather() {
+        WeatherHelper.Result cached = prefs.weather();
+        long now = System.currentTimeMillis();
+        if (cached != null && (now - cached.time) < 3600_000L) {
+            displayWeather(cached);
+            return;
+        }
+        b.tvWeather.setText(R.string.w_loading);
+        new Thread(() -> {
+            WeatherHelper.Result res = WeatherHelper.fetch(prefs.district());
+            if (res != null) {
+                prefs.setWeather(res);
+                runOnUiThread(() -> displayWeather(res));
+            } else if (cached != null) {
+                runOnUiThread(() -> displayWeather(cached));
+            } else {
+                runOnUiThread(() -> b.tvWeather.setText(R.string.sync_offline));
+            }
+        }).start();
+    }
+
+    private void displayWeather(WeatherHelper.Result r) {
+        String[] districts = getResources().getStringArray(R.array.district_names);
+        String dName = r.district >= 0 && r.district < districts.length ? districts[r.district] : "";
+        StringBuilder sb = new StringBuilder();
+        sb.append(getString(R.string.w_line, dName, NumFmt.n(r.temp), NumFmt.n(r.humidity)));
+        int stress = WeatherHelper.heatStress(r.temp, r.humidity);
+        int stressRes = stress == 1 ? R.string.w_mild : stress == 2 ? R.string.w_moderate
+                : stress == 3 ? R.string.w_severe : R.string.w_comfort;
+        sb.append("\n").append(getString(stressRes));
+        if (r.rain > 0.5) {
+            sb.append("\n").append(getString(R.string.w_rain, NumFmt.n(r.rain)));
+        }
+        b.tvWeather.setText(sb.toString());
+    }
+
+    private void chooseDistrict() {
+        String[] districts = getResources().getStringArray(R.array.district_names);
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.w_choose)
+                .setSingleChoiceItems(districts, prefs.district(), (dialog, which) -> {
+                    prefs.setDistrict(which);
+                    dialog.dismiss();
+                    refreshWeather();
+                })
+                .show();
     }
 
     private void goToLogin() {

@@ -167,6 +167,20 @@ public class Repository {
         });
     }
 
+    /** Stores the photo file path in the animal's notes field (prefixed with "photo:"). */
+    public void savePhotoPath(long animalId, String path, Callback<Boolean> cb) {
+        io.execute(() -> {
+            Animal a = animalDao.findById(animalId);
+            if (a != null) {
+                a.notes = "photo:" + path;
+                animalDao.update(a);
+            }
+            done(cb);
+        });
+    }
+
+    public Animal getAnimalSync(long id) { return animalDao.findById(id); }
+
     // ---------- Feed ----------
 
     public LiveData<List<FeedType>> feedTypes() { return feedTypeDao.getAll(); }

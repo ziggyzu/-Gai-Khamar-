@@ -1,5 +1,8 @@
 package com.gaikhamar.app.ui;
 
+import android.content.Intent;
+import com.gaikhamar.app.util.PhotoHelper;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -24,6 +27,8 @@ import com.gaikhamar.app.viewmodel.AnimalViewModel;
 import com.gaikhamar.app.viewmodel.BatchViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.WriterException;
+import com.gaikhamar.app.data.ExtraRepository;
+import com.gaikhamar.app.util.Access;
 
 import java.util.List;
 import java.util.Locale;
@@ -80,12 +85,17 @@ public class AnimalDetailActivity extends BaseActivity {
         b.btnQuarantine.setOnClickListener(v -> repo.toggleQuarantine(animalId, ok -> toast(R.string.quarantine_updated)));
         b.btnRecovered.setOnClickListener(v -> repo.markRecovered(animalId, ok -> toast(R.string.recovered_done)));
         b.btnSell.setOnClickListener(v -> showSell());
+        b.ivPhoto.setOnClickListener(v -> openPhoto());
+        b.btnPhoto.setOnClickListener(v -> openPhoto());
+        b.btnEdit.setOnClickListener(v -> showEdit());
+        b.btnDead.setOnClickListener(v -> showDead());
     }
 
     // ---------------------------------------------------------------- screen
 
     private void refresh() {
         if (animal == null) return;
+        PhotoHelper.load(this, animalId, b.ivPhoto);
         Animal a = animal;
         boolean dairy = "DAIRY".equals(a.category);
         boolean active = "ACTIVE".equals(a.status);
@@ -104,7 +114,7 @@ public class AnimalDetailActivity extends BaseActivity {
         b.groupCommonActions.setVisibility(active ? View.VISIBLE : View.GONE);
         b.btnQuarantine.setText("QUARANTINE".equals(a.healthStatus) ? R.string.quarantine_end : R.string.quarantine_start);
         b.btnRecovered.setVisibility("HEALTHY".equals(a.healthStatus) ? View.GONE : View.VISIBLE);
-
+        b.btnSell.setVisibility(Access.canSeeMoney(session.getRole()) ? View.VISIBLE : View.GONE);
         // Details
         StringBuilder sb = new StringBuilder();
         line(sb, R.string.d_category, LabelHelper.category(this, a.category));
@@ -222,6 +232,37 @@ public class AnimalDetailActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    private String nz(String s) { return s == null ? "" : s; }
+
+    private void showEdit() {
+        if (animal == null) return;
+        new FormDialog.Builder(this, R.string.edit_animal)
+                .text("tag", R.string.ear_tag, nz(animal.earTag))
+                .text("name", R.string.animal_name, nz(animal.name))
+                .text("breed", R.string.breed, nz(animal.breed))
+                .text("notes", R.string.notes, nz(animal.notes))
+                .number("target", R.string.target_weight,
+                        animal.targetWeightKg > 0 ? NumFmt.plain(animal.targetWeightKg) : null)
+                .show(v -> {
+                    if (v.str("breed").isEmpty()) { toast(R.string.err_breed); return false; }
+                    ExtraRepository.get(this).updateAnimal(animalId, v.str("tag"), v.str("name"),
+                            v.str("breed"), v.str("notes"), v.num("target"), ok -> toast(R.string.animal_updated));
+                    return true;
+                });
+    }
+
+    private void showDead() {
+        new FormDialog.Builder(this, R.string.mark_dead)
+                .date("date", R.string.date)
+                .text("cause", R.string.dead_cause)
+                .show(v -> {
+                    String note = getString(R.string.dead_note, v.str("date"))
+                            + (v.str("cause").isEmpty() ? "" : ": " + v.str("cause"));
+                    ExtraRepository.get(this).markDead(animalId, note, ok -> toast(R.string.dead_done));
+                    return true;
+                });
     }
 
     private boolean notEmpty(String s) { return s != null && !s.isEmpty(); }
@@ -371,6 +412,18 @@ public class AnimalDetailActivity extends BaseActivity {
                     return true;
                 });
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (b != null) PhotoHelper.load(this, animalId, b.ivPhoto);
+    }
+
+    private void openPhoto() {
+        Intent i = new Intent(this, AnimalPhotoActivity.class);
+        i.putExtra(AnimalPhotoActivity.EXTRA_ID, animalId);
+        startActivity(i);
+    }
+
 
     private void showSell() {
         new FormDialog.Builder(this, R.string.sell_animal)

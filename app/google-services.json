@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "226332564619",
+    "firebase_url": "https://gaikhamar-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "gaikhamar",
+    "storage_bucket": "gaikhamar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226332564619:android:ed638aae0447e91535488e",
+        "android_client_info": {
+          "package_name": "com.gaikhamar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226332564619-uu27rq2lo18jegsatdl924rgup920iul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaikhamar.app",
+            "certificate_hash": "7724b91ee1f488b85fcf0f0fb53d14142d1e7a56"
+          }
+        },
+        {
+          "client_id": "226332564619-0etek6cbp39u33rp98jtjdlr3o6omtnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3CtRfQEiq5sWk8ixJ9nDngz5Bxzjo9BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226332564619-0etek6cbp39u33rp98jtjdlr3o6omtnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

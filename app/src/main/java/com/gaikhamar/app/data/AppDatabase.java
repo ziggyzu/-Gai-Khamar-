@@ -12,7 +12,8 @@ import com.gaikhamar.app.data.entity.*;
 @Database(entities = {User.class, Animal.class, FeedType.class, FeedLog.class, FeedPurchase.class,
         WeightRecord.class, Batch.class, MilkRecord.class, BreedingRecord.class, CalvingRecord.class,
         HealthRecord.class, Vaccination.class, FarmContact.class, FinanceRecord.class,
-        Customer.class, LedgerEntry.class}, version = 4, exportSchema = false)
+        Customer.class, LedgerEntry.class, Loan.class, Worker.class, Attendance.class},
+        version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -30,6 +31,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ContactDao contactDao();
     public abstract FinanceDao financeDao();
     public abstract CustomerDao customerDao();
+    public abstract LoanDao loanDao();
+    public abstract WorkerDao workerDao();
 
     private static volatile AppDatabase INSTANCE;
 
@@ -38,7 +41,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    AppDatabase.class, "gai_khamar.db")
+                            AppDatabase.class, "gai_khamar.db")
                             .fallbackToDestructiveMigration() // dev only: resets data on version change
                             .build();
                 }

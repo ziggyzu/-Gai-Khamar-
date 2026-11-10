@@ -2,10 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gaikhamar.app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -14,78 +18,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GaiKhamar">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/file_paths" />
 
-        <activity
-            android:name=".ui.LoginActivity"
-            android:exported="true">
+        <activity android:name=".ui.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.AnimalListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.AddAnimalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.AnimalDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.FeedStockActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.FeedLogActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MilkActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.BatchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.VaccinationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ContactsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ContactPickerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.FinanceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.CustomersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.LedgerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ProfitActivity"
-            android:exported="false" />
+        <activity android:name=".ui.SignupActivity" android:exported="false" />
+        <activity android:name=".ui.MainActivity" android:exported="false" />
+        <activity android:name=".ui.MoreActivity" android:exported="false" />
+        <activity android:name=".ui.AnimalListActivity" android:exported="false" />
+        <activity android:name=".ui.AddAnimalActivity" android:exported="false" />
+        <activity android:name=".ui.AnimalDetailActivity" android:exported="false" />
+        <activity android:name=".ui.AnimalPhotoActivity" android:exported="false" />
+        <activity android:name=".ui.FeedStockActivity" android:exported="false" />
+        <activity android:name=".ui.FeedLogActivity" android:exported="false" />
+        <activity android:name=".ui.MilkActivity" android:exported="false" />
+        <activity android:name=".ui.BatchActivity" android:exported="false" />
+        <activity android:name=".ui.VaccinationActivity" android:exported="false" />
+        <activity android:name=".ui.ContactsActivity" android:exported="false" />
+        <activity android:name=".ui.ContactPickerActivity" android:exported="false" />
+        <activity android:name=".ui.FinanceActivity" android:exported="false" />
+        <activity android:name=".ui.CustomersActivity" android:exported="false" />
+        <activity android:name=".ui.LedgerActivity" android:exported="false" />
+        <activity android:name=".ui.ProfitActivity" android:exported="false" />
+        <activity android:name=".ui.LoansActivity" android:exported="false" />
+        <activity android:name=".ui.WorkersActivity" android:exported="false" />
+        <activity android:name=".ui.BoardActivity" android:exported="false" />
 
-        <service
-            android:name=".system.FarmMonitorService"
-            android:exported="false" />
+        <service android:name=".system.FarmMonitorService" android:exported="false" />
 
-        <receiver
-            android:name=".system.ReminderReceiver"
-            android:exported="false" />
-        <receiver
-            android:name=".system.BootReceiver"
-            android:exported="true">
+        <receiver android:name=".system.ReminderReceiver" android:exported="false" />
+        <receiver android:name=".system.BootReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -95,6 +60,7 @@
             android:name=".data.FarmProvider"
             android:authorities="com.gaikhamar.app.provider"
             android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -105,5 +71,4 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
 </manifest>

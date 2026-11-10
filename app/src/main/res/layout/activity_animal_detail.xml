@@ -31,6 +31,15 @@
             android:layout_marginTop="12dp"
             android:contentDescription="@string/qr_code" />
 
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/photo"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tvDetails"
             android:layout_width="match_parent"
@@ -63,6 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:orientation="vertical">
+
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddWeight"
@@ -156,6 +167,30 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/mark_recovered" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPhoto"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/photo" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEdit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/edit_animal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDead"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mark_dead" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSell"

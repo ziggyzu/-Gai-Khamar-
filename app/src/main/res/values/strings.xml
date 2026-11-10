@@ -57,7 +57,7 @@
 
     <!-- Messages -->
     <string name="err_enter_phone_password">Enter phone and password</string>
-    <string name="err_wrong_login">Wrong phone or password</string>
+    <string name="err_wrong_login">Wrong email, phone or password</string>
     <string name="err_name_farm">Enter your name and farm name</string>
     <string name="err_phone">Enter a valid phone number</string>
     <string name="err_farm_code">Farm code must be 2-3 English letters</string>
@@ -396,5 +396,146 @@
         <item>Feed</item><item>Medicine and vet</item><item>Labor</item><item>Transport</item>
         <item>Electricity and water</item><item>Equipment</item><item>Animal purchase</item><item>Other expense</item>
     </string-array>
+
+    <!-- ===== Phase 6 ===== -->
+    <string name="more">More</string>
+    <string name="no">No</string>
+    <string name="scan_qr">Scan animal QR</string>
+    <string name="scan_prompt">Point the camera at the animal QR code</string>
+    <string name="scan_not_found">No animal found with this ID</string>
+    <string name="market_prices">Market prices</string>
+    <string name="farm_tasks">Farm tasks</string>
+    <string name="loans">Loans</string>
+    <string name="workers">Workers</string>
+    <string name="cloud_sync">Sync now</string>
+    <string name="cloud_restore">Restore from cloud</string>
+    <string name="cloud_connected">Cloud account: connected</string>
+    <string name="cloud_not_connected">Cloud account: not connected. Tap Connect cloud account below.</string>
+    <string name="sync_last">Cloud backup: last synced %1$s</string>
+    <string name="sync_never">Cloud backup: not synced yet</string>
+    <string name="sync_offline">No internet connection</string>
+    <string name="sync_busy">Working, please wait...</string>
+    <string name="sync_done">Synced to the cloud</string>
+    <string name="sync_failed">Could not sync. Check your internet and try again.</string>
+    <string name="sync_need_login">Cloud account is not connected. Open More and tap Connect cloud account.</string>
+    <string name="sync_restored">Data restored from the cloud</string>
+    <string name="sync_cloud_empty">Nothing to restore: the cloud has no data yet</string>
+    <string name="restore_title">Restore from cloud?</string>
+    <string name="restore_message">This replaces the data on this phone with the data saved in the cloud.</string>
+    <string name="restore">Restore</string>
+    <string name="weather_place">Weather location</string>
+    <string name="w_choose">Choose your district</string>
+    <string name="w_loading">Loading weather...</string>
+    <string name="w_line">%1$s: %2$s°C, humidity %3$s%%</string>
+    <string name="w_comfort">Comfortable weather for cattle.</string>
+    <string name="w_mild">Mild heat stress: give shade and cool, clean water.</string>
+    <string name="w_moderate">Moderate heat stress: add shade and water, and avoid work at midday.</string>
+    <string name="w_severe">Severe heat stress: cool the animals, give plenty of water, and call the vet if they struggle to breathe.</string>
+    <string name="w_rain">Rain expected today (%1$s mm): keep feed dry and the shed clean.</string>
+    <string name="w_credit">Weather data by Open-Meteo.com</string>
+    <string name="bio_toggle_on">Fingerprint unlock: ON (tap to turn off)</string>
+    <string name="bio_toggle_off">Fingerprint unlock: OFF (tap to turn on)</string>
+    <string name="bio_title">Confirm your fingerprint</string>
+    <string name="bio_unavailable">Fingerprint is not set up on this phone</string>
+    <string name="bio_failed">Fingerprint not recognized</string>
+    <string name="bio_offer_title">Fingerprint unlock</string>
+    <string name="bio_offer">Open the app with your fingerprint next time?</string>
+    <string name="photo">Photo</string>
+    <string name="take_photo">Take photo</string>
+    <string name="no_photo">No photo yet</string>
+    <string name="camera_denied">Camera permission was denied</string>
+    <string name="no_camera">No camera app found</string>
+    <string name="voice_input">Voice input</string>
+    <string name="voice_prompt">Say the animal ID, tag or name</string>
+    <string name="voice_missing">Voice input is not available on this phone</string>
+    <string name="no_cloud_account">Cloud account is not connected. Open More and tap Connect cloud account.</string>
+    <string name="board_error">Could not load shared data</string>
+    <string name="no_prices">No prices yet. Tap + to add one.</string>
+    <string name="no_tasks">No tasks yet. Tap + to add one.</string>
+    <string name="add_price">Add price</string>
+    <string name="price_item">Item</string>
+    <string name="price_value">Price (৳)</string>
+    <string name="add_task">Add task</string>
+    <string name="task_title">Task</string>
+    <string name="assignee">Assigned to (optional)</string>
+    <string name="task_done">Done</string>
+    <string name="task_todo">To do</string>
+    <string name="task_mark_done">Mark as done</string>
+    <string name="task_mark_todo">Mark as to do</string>
+    <string name="err_task">Enter the task</string>
+    <string name="add_loan">Add loan</string>
+    <string name="lender">Lender or bank</string>
+    <string name="loan_amount">Loan amount (৳)</string>
+    <string name="installment">Installment amount (৳)</string>
+    <string name="first_due">First due date</string>
+    <string name="pay_installment">Pay installment</string>
+    <string name="loan_balance">Balance</string>
+    <string name="loan_next">Next due: %1$s</string>
+    <string name="loan_installment">Installment ৳%1$s</string>
+    <string name="loan_paid">Paid off</string>
+    <string name="no_loans">No loans yet. Tap + to add one.</string>
+    <string name="err_lender">Enter the lender name</string>
+    <string name="err_loan">Enter the loan amount</string>
+    <string name="add_worker">Add worker</string>
+    <string name="wage_per_day">Daily wage (৳)</string>
+    <string name="worker_password">Login password (optional, at least 6 characters)</string>
+    <string name="present">Present</string>
+    <string name="absent">Absent</string>
+    <string name="mark_present">Mark present today</string>
+    <string name="mark_absent">Mark absent today</string>
+    <string name="pay_wages">Pay wages for this month</string>
+    <string name="days_month">%1$s days this month</string>
+    <string name="wage_line">%1$s  |  ৳%2$s per day</string>
+    <string name="no_workers">No workers yet. Tap + to add one.</string>
+    <string name="err_worker">Enter the worker name</string>
+    <string name="err_login_password">Password must be at least 6 characters</string>
+
+    <string-array name="district_names">
+        <item>Barishal</item><item>Bogura</item><item>Chattogram</item><item>Cumilla</item>
+        <item>Dhaka</item><item>Dinajpur</item><item>Faridpur</item><item>Gazipur</item>
+        <item>Jashore</item><item>Khulna</item><item>Kushtia</item><item>Mymensingh</item>
+        <item>Pabna</item><item>Rajshahi</item><item>Rangpur</item><item>Sylhet</item>
+    </string-array>
+    <string-array name="price_item_codes">
+        <item>MILK</item><item>LIVE_CATTLE</item><item>CALF</item><item>FEED</item><item>OTHER</item>
+    </string-array>
+    <string-array name="price_item_labels">
+        <item>Milk (per liter)</item><item>Live cattle (per kg)</item><item>Calf (each)</item>
+        <item>Feed (per kg)</item><item>Other</item>
+    </string-array>
+    <string-array name="staff_role_codes">
+        <item>WORKER</item><item>MANAGER</item>
+    </string-array>
+    <string-array name="staff_role_labels">
+        <item>Worker</item><item>Manager</item>
+    </string-array>
+    <!-- Accounts, cloud connect, edit animal -->
+    <string name="login_id">Email or phone</string>
+    <string name="email">Email</string>
+    <string name="continue_google">Continue with Google</string>
+    <string name="signup_google">Sign up with Google</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="or_text">or</string>
+    <string name="reset_sent">If this email has an account, a password reset link was sent.</string>
+    <string name="err_email">Enter a valid email address and a password of 6 or more characters</string>
+    <string name="err_login_id">Enter your email or phone and password</string>
+    <string name="err_email_exists">This email already has an account. Please log in instead.</string>
+    <string name="auth_failed">Sign-in failed (%1$s)</string>
+    <string name="auth_network">No internet. Try again when you are online.</string>
+    <string name="saved_offline">Account saved on this phone. It connects to the cloud next time you log in online.</string>
+    <string name="google_cancelled">Google sign-in was not completed</string>
+    <string name="setup_title">Finish setting up your farm</string>
+    <string name="connect_cloud">Connect cloud account</string>
+    <string name="connect_title">Connect to the cloud</string>
+    <string name="connect_email">Email and password</string>
+    <string name="connect_google">Google account</string>
+    <string name="cloud_connected_as">Cloud account: %1$s</string>
+    <string name="connected_ok">Cloud account connected</string>
+    <string name="edit_animal">Edit details</string>
+    <string name="mark_dead">Mark as dead</string>
+    <string name="dead_cause">Cause (optional)</string>
+    <string name="dead_note">Died on %1$s</string>
+    <string name="dead_done">Marked as dead</string>
+    <string name="animal_updated">Details updated</string>
 
 </resources>

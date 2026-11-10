@@ -65,4 +65,7 @@ public interface AnimalDao {
     @Query("SELECT COUNT(*) FROM animals WHERE status = 'ACTIVE' AND IFNULL(withdrawalUntil, '') != '' "
             + "AND withdrawalUntil >= :today")
     int withdrawalCountSync(String today);
-}
+
+    @Query("SELECT id FROM animals WHERE farmCattleId = :code LIMIT 1")
+    Long idByCode(String code);
+}

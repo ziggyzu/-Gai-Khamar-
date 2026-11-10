@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.gaikhamar.app.data.entity.User;
 
@@ -12,6 +13,10 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     long insert(User user);
 
-    @Query("SELECT * FROM users WHERE phone = :phone LIMIT 1")
-    User findByPhone(String phone);
+    @Update
+    void update(User user);
+
+    // The "phone" column holds the login id: an email or phone digits
+    @Query("SELECT * FROM users WHERE phone = :loginId LIMIT 1")
+    User findByPhone(String loginId);
 }

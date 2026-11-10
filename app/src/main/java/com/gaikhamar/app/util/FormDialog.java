@@ -56,7 +56,7 @@ public final class FormDialog {
         }
     }
 
-    private static final int TEXT = 0, NUMBER = 1, DATE = 2, CHOICE = 3, PHONE = 4;
+    private static final int TEXT = 0, NUMBER = 1, DATE = 2, CHOICE = 3, PHONE = 4, PASSWORD = 5;
 
     private static class Field {
         final String key;
@@ -91,6 +91,7 @@ public final class FormDialog {
         public Builder text(String key, int label) { return add(key, label, TEXT, null, null); }
         public Builder text(String key, int label, String preset) { return add(key, label, TEXT, null, preset); }
         public Builder phone(String key, int label, String preset) { return add(key, label, PHONE, null, preset); }
+        public Builder password(String key, int label) { return add(key, label, PASSWORD, null, null); }
         public Builder number(String key, int label) { return add(key, label, NUMBER, null, null); }
         public Builder number(String key, int label, String preset) { return add(key, label, NUMBER, null, preset); }
         public Builder date(String key, int label) { return add(key, label, DATE, null, null); }
@@ -136,6 +137,8 @@ public final class FormDialog {
                         et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                     } else if (f.kind == PHONE) {
                         et.setInputType(InputType.TYPE_CLASS_PHONE);
+                    } else if (f.kind == PASSWORD) {
+                        et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     } else if (f.kind == DATE) {
                         et.setFocusable(false);
                         et.setClickable(true);

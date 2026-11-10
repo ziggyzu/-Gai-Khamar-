@@ -57,7 +57,7 @@
 
     <!-- Messages -->
     <string name="err_enter_phone_password">ফোন নম্বর ও পাসওয়ার্ড দিন</string>
-    <string name="err_wrong_login">ফোন নম্বর বা পাসওয়ার্ড ভুল</string>
+    <string name="err_wrong_login">ইমেইল, ফোন বা পাসওয়ার্ড ভুল</string>
     <string name="err_name_farm">আপনার নাম ও খামারের নাম দিন</string>
     <string name="err_phone">সঠিক ফোন নম্বর দিন</string>
     <string name="err_farm_code">খামারের কোড ২-৩টি ইংরেজি অক্ষরের হতে হবে</string>
@@ -380,5 +380,140 @@
         <item>খাদ্য</item><item>ওষুধ ও চিকিৎসা</item><item>শ্রমিক</item><item>পরিবহন</item>
         <item>বিদ্যুৎ ও পানি</item><item>সরঞ্জাম</item><item>পশু ক্রয়</item><item>অন্য খরচ</item>
     </string-array>
+
+    <!-- ===== Phase 6 ===== -->
+    <string name="more">আরও</string>
+    <string name="no">না</string>
+    <string name="scan_qr">পশুর কিউআর স্ক্যান করুন</string>
+    <string name="scan_prompt">ক্যামেরা পশুর কিউআর কোডের দিকে ধরুন</string>
+    <string name="scan_not_found">এই আইডির কোনো পশু পাওয়া যায়নি</string>
+    <string name="market_prices">বাজারদর</string>
+    <string name="farm_tasks">খামারের কাজ</string>
+    <string name="loans">ঋণ</string>
+    <string name="workers">শ্রমিক</string>
+    <string name="cloud_sync">এখনই সিঙ্ক করুন</string>
+    <string name="cloud_restore">ক্লাউড থেকে ফিরিয়ে আনুন</string>
+    <string name="cloud_connected">ক্লাউড অ্যাকাউন্ট: যুক্ত আছে</string>
+    <string name="cloud_not_connected">ক্লাউড অ্যাকাউন্ট: যুক্ত নেই। নিচের ক্লাউড অ্যাকাউন্ট যুক্ত করুন বোতাম চাপুন।</string>
+    <string name="sync_last">ক্লাউড ব্যাকআপ: সর্বশেষ সিঙ্ক %1$s</string>
+    <string name="sync_never">ক্লাউড ব্যাকআপ: এখনও সিঙ্ক হয়নি</string>
+    <string name="sync_offline">ইন্টারনেট সংযোগ নেই</string>
+    <string name="sync_busy">কাজ চলছে, একটু অপেক্ষা করুন...</string>
+    <string name="sync_done">ক্লাউডে সিঙ্ক হয়েছে</string>
+    <string name="sync_failed">সিঙ্ক করা যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন।</string>
+    <string name="sync_need_login">ক্লাউড অ্যাকাউন্ট যুক্ত নেই। আরও খুলে ক্লাউড অ্যাকাউন্ট যুক্ত করুন চাপুন।</string>
+    <string name="sync_restored">ক্লাউড থেকে তথ্য ফিরিয়ে আনা হয়েছে</string>
+    <string name="sync_cloud_empty">ফিরিয়ে আনার মতো কিছু নেই: ক্লাউডে এখনও কোনো তথ্য নেই</string>
+    <string name="restore_title">ক্লাউড থেকে ফিরিয়ে আনবেন?</string>
+    <string name="restore_message">এতে এই ফোনের তথ্য মুছে ক্লাউডে রাখা তথ্য বসবে।</string>
+    <string name="restore">ফিরিয়ে আনুন</string>
+    <string name="weather_place">আবহাওয়ার স্থান</string>
+    <string name="w_choose">আপনার জেলা বাছুন</string>
+    <string name="w_loading">আবহাওয়া আসছে...</string>
+    <string name="w_line">%1$s: %2$s°সে., আর্দ্রতা %3$s%%</string>
+    <string name="w_comfort">গবাদিপশুর জন্য আবহাওয়া আরামদায়ক।</string>
+    <string name="w_mild">হালকা গরমের চাপ: ছায়া এবং ঠান্ডা পরিষ্কার পানি দিন।</string>
+    <string name="w_moderate">মাঝারি গরমের চাপ: ছায়া ও পানির ব্যবস্থা বাড়ান এবং দুপুরে কাজ এড়িয়ে চলুন।</string>
+    <string name="w_severe">তীব্র গরমের চাপ: পশুদের ঠান্ডা রাখুন, প্রচুর পানি দিন, শ্বাসকষ্ট হলে ডাক্তার ডাকুন।</string>
+    <string name="w_rain">আজ বৃষ্টির সম্ভাবনা (%1$s মিমি): খাদ্য শুকনো রাখুন ও গোয়াল পরিষ্কার রাখুন।</string>
+    <string name="w_credit">আবহাওয়ার তথ্য: Open-Meteo.com</string>
+    <string name="bio_toggle_on">ফিঙ্গারপ্রিন্ট আনলক: চালু (বন্ধ করতে চাপুন)</string>
+    <string name="bio_toggle_off">ফিঙ্গারপ্রিন্ট আনলক: বন্ধ (চালু করতে চাপুন)</string>
+    <string name="bio_title">আপনার ফিঙ্গারপ্রিন্ট নিশ্চিত করুন</string>
+    <string name="bio_unavailable">এই ফোনে ফিঙ্গারপ্রিন্ট সেট করা নেই</string>
+    <string name="bio_failed">ফিঙ্গারপ্রিন্ট মেলেনি</string>
+    <string name="bio_offer_title">ফিঙ্গারপ্রিন্ট আনলক</string>
+    <string name="bio_offer">পরের বার ফিঙ্গারপ্রিন্ট দিয়ে অ্যাপ খুলবেন?</string>
+    <string name="photo">ছবি</string>
+    <string name="take_photo">ছবি তুলুন</string>
+    <string name="no_photo">এখনও কোনো ছবি নেই</string>
+    <string name="camera_denied">ক্যামেরার অনুমতি দেওয়া হয়নি</string>
+    <string name="no_camera">কোনো ক্যামেরা অ্যাপ পাওয়া যায়নি</string>
+    <string name="voice_input">ভয়েস ইনপুট</string>
+    <string name="voice_prompt">পশুর আইডি, ট্যাগ বা নাম বলুন</string>
+    <string name="voice_missing">এই ফোনে ভয়েস ইনপুট নেই</string>
+    <string name="no_cloud_account">ক্লাউড অ্যাকাউন্ট যুক্ত নেই। আরও খুলে ক্লাউড অ্যাকাউন্ট যুক্ত করুন চাপুন।</string>
+    <string name="board_error">শেয়ার করা তথ্য আনা যায়নি</string>
+    <string name="no_prices">এখনও কোনো দাম নেই। যোগ করতে + চাপুন।</string>
+    <string name="no_tasks">এখনও কোনো কাজ নেই। যোগ করতে + চাপুন।</string>
+    <string name="add_price">দাম যোগ করুন</string>
+    <string name="price_item">জিনিস</string>
+    <string name="price_value">দাম (৳)</string>
+    <string name="add_task">কাজ যোগ করুন</string>
+    <string name="task_title">কাজ</string>
+    <string name="assignee">কার দায়িত্বে (ঐচ্ছিক)</string>
+    <string name="task_done">শেষ</string>
+    <string name="task_todo">বাকি</string>
+    <string name="task_mark_done">শেষ হয়েছে</string>
+    <string name="task_mark_todo">বাকি আছে</string>
+    <string name="err_task">কাজের নাম দিন</string>
+    <string name="add_loan">ঋণ যোগ করুন</string>
+    <string name="lender">ঋণদাতা বা ব্যাংক</string>
+    <string name="loan_amount">ঋণের পরিমাণ (৳)</string>
+    <string name="installment">কিস্তির পরিমাণ (৳)</string>
+    <string name="first_due">প্রথম কিস্তির তারিখ</string>
+    <string name="pay_installment">কিস্তি দিন</string>
+    <string name="loan_balance">বাকি</string>
+    <string name="loan_next">পরবর্তী কিস্তি: %1$s</string>
+    <string name="loan_installment">কিস্তি ৳%1$s</string>
+    <string name="loan_paid">পরিশোধ হয়েছে</string>
+    <string name="no_loans">এখনও কোনো ঋণ নেই। যোগ করতে + চাপুন।</string>
+    <string name="err_lender">ঋণদাতার নাম দিন</string>
+    <string name="err_loan">ঋণের পরিমাণ দিন</string>
+    <string name="add_worker">শ্রমিক যোগ করুন</string>
+    <string name="wage_per_day">দৈনিক মজুরি (৳)</string>
+    <string name="worker_password">লগইন পাসওয়ার্ড (ঐচ্ছিক, কমপক্ষে ৬ অক্ষর)</string>
+    <string name="present">উপস্থিত</string>
+    <string name="absent">অনুপস্থিত</string>
+    <string name="mark_present">আজ উপস্থিত লিখুন</string>
+    <string name="mark_absent">আজ অনুপস্থিত লিখুন</string>
+    <string name="pay_wages">এই মাসের মজুরি দিন</string>
+    <string name="days_month">এই মাসে %1$s দিন</string>
+    <string name="wage_line">%1$s  |  প্রতিদিন ৳%2$s</string>
+    <string name="no_workers">এখনও কোনো শ্রমিক নেই। যোগ করতে + চাপুন।</string>
+    <string name="err_worker">শ্রমিকের নাম দিন</string>
+    <string name="err_login_password">পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে</string>
+
+    <string-array name="district_names">
+        <item>বরিশাল</item><item>বগুড়া</item><item>চট্টগ্রাম</item><item>কুমিল্লা</item>
+        <item>ঢাকা</item><item>দিনাজপুর</item><item>ফরিদপুর</item><item>গাজীপুর</item>
+        <item>যশোর</item><item>খুলনা</item><item>কুষ্টিয়া</item><item>ময়মনসিংহ</item>
+        <item>পাবনা</item><item>রাজশাহী</item><item>রংপুর</item><item>সিলেট</item>
+    </string-array>
+    <string-array name="price_item_labels">
+        <item>দুধ (প্রতি লিটার)</item><item>জীবিত গরু (প্রতি কেজি)</item><item>বাছুর (প্রতিটি)</item>
+        <item>খাদ্য (প্রতি কেজি)</item><item>অন্যান্য</item>
+    </string-array>
+    <string-array name="staff_role_labels">
+        <item>শ্রমিক</item><item>ম্যানেজার</item>
+    </string-array>
+    <!-- Accounts, cloud connect, edit animal -->
+    <string name="login_id">ইমেইল বা ফোন</string>
+    <string name="email">ইমেইল</string>
+    <string name="continue_google">গুগল দিয়ে চালিয়ে যান</string>
+    <string name="signup_google">গুগল দিয়ে সাইন আপ করুন</string>
+    <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="or_text">অথবা</string>
+    <string name="reset_sent">এই ইমেইলে অ্যাকাউন্ট থাকলে পাসওয়ার্ড রিসেটের লিংক পাঠানো হয়েছে।</string>
+    <string name="err_email">সঠিক ইমেইল ঠিকানা এবং ৬ বা তার বেশি অক্ষরের পাসওয়ার্ড দিন</string>
+    <string name="err_login_id">আপনার ইমেইল বা ফোন এবং পাসওয়ার্ড দিন</string>
+    <string name="err_email_exists">এই ইমেইলে আগেই অ্যাকাউন্ট আছে। অনুগ্রহ করে লগইন করুন।</string>
+    <string name="auth_failed">সাইন-ইন হয়নি (%1$s)</string>
+    <string name="auth_network">ইন্টারনেট নেই। অনলাইনে থাকলে আবার চেষ্টা করুন।</string>
+    <string name="saved_offline">অ্যাকাউন্ট এই ফোনে সংরক্ষিত হয়েছে। পরের বার অনলাইনে লগইন করলে ক্লাউডে যুক্ত হবে।</string>
+    <string name="google_cancelled">গুগল সাইন-ইন সম্পন্ন হয়নি</string>
+    <string name="setup_title">আপনার খামারের তথ্য দিন</string>
+    <string name="connect_cloud">ক্লাউড অ্যাকাউন্ট যুক্ত করুন</string>
+    <string name="connect_title">ক্লাউডে যুক্ত হোন</string>
+    <string name="connect_email">ইমেইল ও পাসওয়ার্ড</string>
+    <string name="connect_google">গুগল অ্যাকাউন্ট</string>
+    <string name="cloud_connected_as">ক্লাউড অ্যাকাউন্ট: %1$s</string>
+    <string name="connected_ok">ক্লাউড অ্যাকাউন্ট যুক্ত হয়েছে</string>
+    <string name="edit_animal">তথ্য সম্পাদনা করুন</string>
+    <string name="mark_dead">মৃত হিসেবে চিহ্নিত করুন</string>
+    <string name="dead_cause">কারণ (ঐচ্ছিক)</string>
+    <string name="dead_note">মৃত্যু: %1$s</string>
+    <string name="dead_done">মৃত হিসেবে চিহ্নিত</string>
+    <string name="animal_updated">তথ্য আপডেট হয়েছে</string>
 
 </resources>
